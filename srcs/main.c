@@ -10,10 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../includes/lem_in.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	int fd;
 
+	if (ac != 2)
+		ft_printf("Input file error\n");
+	else
+		fd = open(av[1], O_RDONLY);
+		if (reader(fd) == 0)
+			ft_printf("Success\n");
 	return (0);
 }

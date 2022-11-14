@@ -10,10 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LEM_IN_H
+# define LEM_IN_H
+
+/*
+** Includes
+*/
+
+# include "../libft/libft.h"
+# include "../libft/get_next_line.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+/*
+** Structs
+*/
 
 /*
 ** Main
 */
 
-int	main(void);
+int	main(int ac, char** av);
+int reader(int fd);
+
+#endif
