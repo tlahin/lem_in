@@ -19,6 +19,7 @@
 
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
+# include "../libft/ft_printf/includes/ft_printf.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>

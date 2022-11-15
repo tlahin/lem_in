@@ -15,23 +15,21 @@ NAME = lem-in
 SRCS_DIR = srcs/
 SRCS = main reader
 
-OBJS_DIR = objs/lem_in/
+OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS)))
 
 FLAGS = -Wall -Wextra -Werror
 INCLUDES = includes/
 LIBFT = libft/libft.a
 
-OPTIMIZATION = -Ofast
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc $(OBJS) $(LIBFT) -I $(INCLUDES) $(FLAGS) -o
+	gcc $(OBJS) $(LIBFT) -I $(INCLUDES) $(FLAGS) -o $@
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(INCLUDES) $(LIBFT)
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(INCLUDES)lem_in.h $(LIBFT)
 	@mkdir -p $(OBJS_DIR)
-	gcc -c $(FLAGS) -I $(INCLUDES) $< -o $@ $(OPTIMIZATION)
+	gcc -c $(FLAGS) -I $(INCLUDES) $< -o $@
 
 $(LIBFT):
 	make -C libft/
@@ -42,9 +40,9 @@ clean:
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@make clean -C libft/
-	@rm -f $(OBJS)
-	@rm -rf $(OBJS_DIR)
+	@make fclean -C libft/
+	@/bin/rm -f $(NAME)
+	@/bin/rm -f a.out
 
 re: fclean all
 
