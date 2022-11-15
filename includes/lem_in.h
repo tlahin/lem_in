@@ -31,7 +31,7 @@
 ** Main
 */
 
-int	main(int ac, char** av);
-int reader(int fd);
+int	main(int ac, char **av);
+int	reader(int fd);
 
 #endif
