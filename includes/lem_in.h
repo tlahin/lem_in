@@ -13,26 +13,39 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-/*
-** Includes
-*/
-
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
-# include "../libft/ft_printf/includes/ft_printf.h"
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
-/*
-** Structs
-*/
+# define FAIL   -1
+# define OK     0
 
-/*
-** Main
-*/
+typedef struct s_room_list      t_room_list;
+typedef struct s_room           t_room;
+typedef struct s_line           t_line;
+
+struct s_room
+{
+    char    *name;
+    t_room  *next;
+    t_room  *prev;
+    int     ant;
+};
+
+struct s_room_list
+{
+    t_room      *room;
+    t_room_list *next;
+};
+
+struct s_line
+{
+    int start;
+    int end;
+    int index;
+};
 
 int	main(int ac, char **av);
-int	reader(int fd);
+int read_map(void);
+void    read_command(char *str, int *start_end);
 
 #endif

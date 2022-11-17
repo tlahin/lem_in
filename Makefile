@@ -13,7 +13,7 @@
 NAME = lem-in
 
 SRCS_DIR = srcs/
-SRCS = main reader
+SRCS = main parse_map parse_map_utils
 
 OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS)))

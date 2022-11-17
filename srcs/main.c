@@ -10,19 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 int	main(int ac, char **av)
 {
-	int	fd;
-
-	if (ac != 2)
+	if (av[0])
+		ft_printf("file found\n");
+	if (ac != 1)
 		ft_printf("Input file error\n");
 	else
 	{
-		fd = open(av[1], O_RDONLY);
-		if (reader(fd) == 0)
-			ft_printf("Success\n");
+		read_map();
 	}
 	return (0);
 }
