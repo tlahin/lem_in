@@ -12,63 +12,58 @@
 
 #include "lem_in.h"
 
-static void	parse_line(char *line, int *stage, t_lem_in *main_struct)
+static void	parse_line(char *line, int *stage)
 {
-	static int	start_end;
+	static int room_type;
 
 	if (line[0] != '#')
 	{
+		check_valid_line(line);
+		//check ant
 		if (*stage == 1 || ft_strchr(line, '-'))
 		{
-			//assign
-			ft_printf("link: %s\n", line);
+			//assign_link();
 			*stage = 1;
+			ft_printf("link: %s\n", line);
 		}
-		else if (ft_strlen(line) > 1)
+		else
 		{
-			//assign
-			ft_printf("room: %s\n", line);
-			start_end = 0;
-		}
-		else if (ft_strlen(line) == 1 && ft_isdigit(line[0]))
-		{
-			//assign
-			main_struct->ants = (unsigned int)atoi(&line[0]);
-			ft_printf("ants: %u\n", main_struct->ants);
+			assign_room(line, room_type);
+			room_type = NORMAL_ROOM;
 		}
 	}
 	else
-		read_command(line, &start_end);
+		read_command(line, &room_type);
 }
 
-static void	parse_map(int ret, char *str, t_lem_in *main_struct)
+static void	parse_map(int ret, char *str)
 {
-	int		stage;
 	t_line	line;
 	char	current_line[500];
+	int		stage;
 
+	stage = 0;
 	line.start = 0;
 	line.end = 0;
-	stage = 0;
 	while (line.start < ret)
 	{
 		line.index = 0;
 		while (str[line.end] != '\n' && line.end < ret)
 			current_line[line.index++] = str[line.end++];
 		current_line[line.index] = 0;
-		parse_line(current_line, &stage, main_struct);
+		parse_line(current_line, &stage);
 		line.end++;
 		line.start = line.end;
 	}
 }
 
-int	read_map(t_lem_in *main_struct)
+int	read_map(void)
 {
 	char	*str;
 	int		ret;
 
 	str = (char *)malloc(sizeof(char) * 10000);
 	ret = read(0, str, 10000);
-	parse_map(ret, str, main_struct);
+	parse_map(ret, str);
 	return (OK);
 }

@@ -18,6 +18,9 @@
 
 # define FAIL   -1
 # define OK     0
+# define NORMAL_ROOM 0
+# define START_ROOM -1
+# define END_ROOM 1
 
 typedef struct s_lem_in		t_lem_in;
 typedef struct s_room_list	t_room_list;
@@ -62,7 +65,15 @@ t_lem_in	*init_struct(t_lem_in *main_struct);
 ** Map processing
 */
 
-int			read_map(t_lem_in *main_struct);
-void		read_command(char *str, int *start_end);
+int			read_map(void);
+void		read_command(char *str, int *room_type);
+int			ants_exist(char *line);
+int			check_valid_line(char *line);
+
+/*
+** Assigning
+*/
+
+void		assign_room(char *line, int room_type);
 
 #endif

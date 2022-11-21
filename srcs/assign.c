@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   assign.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlahin <tlahin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 09:33:36 by tlahin            #+#    #+#             */
-/*   Updated: 2022/11/08 09:33:38 by tlahin           ###   ########.fr       */
+/*   Created: 2022/11/21 14:07:09 by tlahin            #+#    #+#             */
+/*   Updated: 2022/11/21 14:07:11 by tlahin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	main(int ac, char **av)
+void	assign_room(char *line, int room_type)
 {
-	t_lem_in	main_struct;
-
-	if (av[0])
-		ft_printf("LGTM! :)\n");
-	if (ac != 1)
-		ft_printf("Input file error\n");
-	else
-	{
-		init_struct(&main_struct);
-		read_map();
-	}
-	return (0);
+	ft_printf("room: %s, ", line);
+	ft_printf("type: %d\n", room_type);
+	//malloc room and do the do
 }

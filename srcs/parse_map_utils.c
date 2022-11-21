@@ -12,10 +12,20 @@
 
 #include "lem_in.h"
 
-void	read_command(char *str, int *start_end)
+int	check_valid_line(char *line)
 {
-	if (!ft_strcmp(str, "##start"))
-		*start_end = -1;
-	else if (!ft_strcmp(str, "##end"))
-		*start_end = 1;
+	if (line[0] == 0 || line[0] == '\n' || line[0] == 'L')
+	{
+		ft_printf("ERROR: bad line\n");
+		exit(FAIL);
+	}
+	return (OK);
+}
+
+void	read_command(char *str, int *room_type)
+{
+	if (ft_strcmp(str, "##start"))
+		*room_type = START_ROOM;
+	else if (ft_strcmp(str, "##end"))
+		*room_type = END_ROOM;
 }
