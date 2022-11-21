@@ -23,22 +23,14 @@
 # define END_ROOM 1
 
 typedef struct s_lem_in		t_lem_in;
-typedef struct s_room_list	t_room_list;
 typedef struct s_room		t_room;
 typedef struct s_line		t_line;
 
 struct s_room
 {
 	char	*name;
-	t_room	*next;
-	t_room	*prev;
 	int		ant;
-};
-
-struct s_room_list
-{
-	t_room		*room;
-	t_room_list	*next;
+	//links?
 };
 
 struct s_line
@@ -52,7 +44,6 @@ struct s_lem_in
 {
 	unsigned int	ants;
 	int				ants_checked;
-
 };
 
 /*
@@ -68,7 +59,7 @@ t_lem_in	*init_struct(t_lem_in *main_struct);
 
 int			read_map(t_lem_in *main_struct);
 void		read_command(char *str, int *room_type);
-int			ant_check(char *line, t_lem_in *main_struct);
+void		ant_check(char *line, t_lem_in *main_struct);
 int			check_valid_line(char *line);
 
 /*

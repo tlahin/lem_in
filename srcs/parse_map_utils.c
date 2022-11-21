@@ -17,7 +17,7 @@ int	check_valid_line(char *line)
 	if (line[0] == 0 || line[0] == '\n' || line[0] == 'L')
 	{
 		ft_printf("ERROR: bad line\n");
-		exit(FAIL);
+		return (FAIL);
 	}
 	return (OK);
 }
@@ -30,7 +30,7 @@ void	read_command(char *str, int *room_type)
 		*room_type = END_ROOM;
 }
 
-int	ant_check(char *line, t_lem_in *main_struct)
+void	ant_check(char *line, t_lem_in *main_struct)
 {
 	int	i;
 
@@ -39,11 +39,10 @@ int	ant_check(char *line, t_lem_in *main_struct)
 		ft_isdigit(line[i++]);
 	main_struct->ants = ft_atoi(line);
 	if (main_struct->ants < 1)
-		return (FAIL);
+		ft_printf("ERROR: no ants found\n");
 	else
 	{
 		ft_printf("ants: %u\n", main_struct->ants);
 		main_struct->ants_checked = OK;
-		return (OK);
 	}
 }
