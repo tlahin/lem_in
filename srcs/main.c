@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	else
 	{
 		init_struct(&main_struct);
-		read_map();
+		read_map(&main_struct);
 	}
 	return (0);
 }

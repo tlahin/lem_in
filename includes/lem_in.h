@@ -51,6 +51,7 @@ struct s_line
 struct s_lem_in
 {
 	unsigned int	ants;
+	int				ants_checked;
 
 };
 
@@ -65,9 +66,9 @@ t_lem_in	*init_struct(t_lem_in *main_struct);
 ** Map processing
 */
 
-int			read_map(void);
+int			read_map(t_lem_in *main_struct);
 void		read_command(char *str, int *room_type);
-int			ants_exist(char *line);
+int			ant_check(char *line, t_lem_in *main_struct);
 int			check_valid_line(char *line);
 
 /*

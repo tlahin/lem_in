@@ -15,5 +15,6 @@
 t_lem_in	*init_struct(t_lem_in *main_struct)
 {
 	main_struct->ants = 0;
+	main_struct->ants_checked = -1;
 	return (main_struct);
 }
