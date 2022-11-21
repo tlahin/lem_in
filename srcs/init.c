@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlahin <tlahin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 09:33:36 by tlahin            #+#    #+#             */
-/*   Updated: 2022/11/08 09:33:38 by tlahin           ###   ########.fr       */
+/*   Created: 2022/11/21 13:35:39 by tlahin            #+#    #+#             */
+/*   Updated: 2022/11/21 13:35:40 by tlahin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	main(int ac, char **av)
+t_lem_in	*init_struct(t_lem_in *main_struct)
 {
-	t_lem_in	main_struct;
-
-	if (av[0])
-		ft_printf("LGTM! :)\n");
-	if (ac != 1)
-		ft_printf("Input file error\n");
-	else
-	{
-		init_struct(&main_struct);
-		read_map(&main_struct);
-	}
-	return (0);
+	main_struct->ants = 0;
+	return (main_struct);
 }
