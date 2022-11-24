@@ -14,14 +14,6 @@
 
 int	assing_ants(char *line, t_lem_in *main_struct)
 {
-	int	i;
-
-	i = 0;
-	if (main_struct->ants_checked != 0)
-		return (FAIL);
-	while (line[i] != 0)
-		check_ants_char(line[i++]);
-	main_struct->ants = ft_atoi(line);
 	return (OK);
 }
 
