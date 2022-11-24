@@ -12,6 +12,15 @@
 
 #include "lem_in.h"
 
+void	read_command(char *line, int *room_type)
+{
+	//check dups
+	if (!ft_strcmp(line, "##start"))
+		*room_type = START_ROOM;
+	else if (!ft_strcmp(line, "##end"))
+		*room_type = END_ROOM;
+}
+
 int	check_valid_line(char *line)
 {
 	if (line[0] == 0 || line[0] == '\n' || line[0] == 'L')
@@ -20,12 +29,4 @@ int	check_valid_line(char *line)
 		return (FAIL);
 	}
 	return (OK);
-}
-
-void	read_command(char *str, int *room_type)
-{
-	if (!ft_strcmp(str, "##start"))
-		*room_type = START_ROOM;
-	else if (!ft_strcmp(str, "##end"))
-		*room_type = END_ROOM;
 }

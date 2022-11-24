@@ -12,15 +12,19 @@
 
 #include "../includes/lem_in.h"
 
+int		g_ant;
+t_hash	*g_hashtable[HASH_SIZE];
+
 int	main(int ac, char **av)
 {
 
 	if (av[0])
-		ft_printf("LGTM! :)\n");
+		ft_printf("\n");
 	if (ac != 1)
 		ft_printf("Input file error\n");
 	else
 	{
+		init_global();
 		read_map();
 	}
 	return (0);

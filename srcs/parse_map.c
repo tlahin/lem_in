@@ -28,7 +28,7 @@ static void	process_line(char *line, int *stage)
 		}
 		else
 		{
-			//rooms
+			assign_room(line, room_type);
 			room_type = NORMAL_ROOM;
 		}
 	}

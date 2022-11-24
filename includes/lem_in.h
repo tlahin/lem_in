@@ -25,17 +25,17 @@
 # define HASH_SIZE		12000
 # define STRING_SIZE	1000000
 
-
+extern int					g_ant;
 
 typedef struct s_lem_in		t_lem_in;
-typedef struct s_hash_table	t_hash_table;
+typedef struct s_hash		t_hash;
 typedef struct s_room		t_room;
 typedef struct s_line		t_line;
 
-struct s_hash_table
+struct s_hash
 {
-	t_room			*room;
-	unsigned int	index;
+	t_room	*room;
+	t_hash	*next;
 };
 
 struct s_room
@@ -56,12 +56,28 @@ struct s_line
 */
 
 int			main(int ac, char **av);
+void		init_global(void);
 
 /*
 ** Map processing
 */
 
 int			read_map(void);
+int			check_valid_line(char *line);
+void		read_command(char *line, int *room_type);
 
+/*
+** Assign
+*/
+
+int		assing_ants(char *line);
+void	assign_room(char *line, int room_type);
+
+/*
+** Error
+*/
+
+void    validate_ants(char c);
+void    check_ant_amount(void);
 
 #endif
