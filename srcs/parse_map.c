@@ -18,7 +18,7 @@ static void	process_line(char *line, int *stage)
 
 	if (line[0] != '#')
 	{
-		check_empty_line(line);
+		check_valid_line(line);
 		if (assing_ants(line))
 			return ;
 		if (*stage == 1 || ft_strchr(line, '-'))
@@ -33,7 +33,7 @@ static void	process_line(char *line, int *stage)
 		}
 	}
 	else
-		//read command
+		read_command(line, &room_type);
 }
 
 static void	parse_map(int ret, char *str)
@@ -51,7 +51,7 @@ static void	parse_map(int ret, char *str)
 		while (str[line.end] != '\n' && line.end < ret)
 			current_line[line.index++] = str[line.end++];
 		current_line[line.index] = 0;
-		process_line(current_line);
+		process_line(current_line, &stage);
 		line.end++;
 		line.start = line.end;
 	}
