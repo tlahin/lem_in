@@ -12,59 +12,58 @@
 
 #include "lem_in.h"
 
-static void	parse_line(char *line, int *stage, t_lem_in *main_struct)
+static void	process_line(char *line, int *stage)
 {
-	static int room_type;
+	static int	room_type;
 
 	if (line[0] != '#')
 	{
-		check_valid_line(line);
-		if (main_struct->ants_checked != OK)
-			ant_check(line, main_struct);
-		else if (*stage == 1 || ft_strchr(line, '-'))
+		check_empty_line(line);
+		if (assing_ants(line))
+			return ;
+		if (*stage == 1 || ft_strchr(line, '-'))
 		{
-			//assign_link();
+			//links
 			*stage = 1;
-			ft_printf("link: %s\n", line);
 		}
 		else
 		{
-			assign_room(line, room_type, main_struct);
+			//rooms
 			room_type = NORMAL_ROOM;
 		}
 	}
 	else
-		read_command(line, &room_type);
+		//read command
 }
 
-static void	parse_map(int ret, char *str, t_lem_in *main_struct)
+static void	parse_map(int ret, char *str)
 {
 	t_line	line;
 	char	current_line[500];
 	int		stage;
 
-	stage = 0;
 	line.start = 0;
 	line.end = 0;
+	stage = 0;
 	while (line.start < ret)
 	{
 		line.index = 0;
 		while (str[line.end] != '\n' && line.end < ret)
 			current_line[line.index++] = str[line.end++];
 		current_line[line.index] = 0;
-		parse_line(current_line, &stage, main_struct);
+		process_line(current_line);
 		line.end++;
 		line.start = line.end;
 	}
 }
 
-int	read_map(t_lem_in *main_struct)
+int	read_map(void)
 {
-	char	*str;
 	int		ret;
+	char	*str;
 
-	str = (char *)malloc(sizeof(char) * 10000);
-	ret = read(0, str, 10000);
-	parse_map(ret, str, main_struct);
+	str = NULL;
+	ret = read(0, str, STRING_SIZE);
+	parse_map(ret, str);
 	return (OK);
 }

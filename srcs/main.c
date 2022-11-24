@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../includes/lem_in.h"
 
 int	main(int ac, char **av)
 {
-	t_lem_in	main_struct;
 
 	if (av[0])
 		ft_printf("LGTM! :)\n");
@@ -22,8 +21,7 @@ int	main(int ac, char **av)
 		ft_printf("Input file error\n");
 	else
 	{
-		init_struct(&main_struct);
-		read_map(&main_struct);
+		read_map();
 	}
 	return (0);
 }
