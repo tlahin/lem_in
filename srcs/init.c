@@ -16,5 +16,6 @@ t_lem_in	*init_struct(t_lem_in *main_struct)
 {
 	main_struct->ants = 0;
 	main_struct->ants_checked = -1;
+	main_struct->hash_table = (t_room_list *)malloc(sizeof(t_room_list));
 	return (main_struct);
 }

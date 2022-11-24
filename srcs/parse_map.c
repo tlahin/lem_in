@@ -29,7 +29,7 @@ static void	parse_line(char *line, int *stage, t_lem_in *main_struct)
 		}
 		else
 		{
-			assign_room(line, room_type);
+			assign_room(line, room_type, main_struct);
 			room_type = NORMAL_ROOM;
 		}
 	}
