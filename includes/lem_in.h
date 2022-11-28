@@ -24,6 +24,8 @@
 # define END_ROOM		1
 # define HASH_SIZE		12000
 # define STRING_SIZE	1000000
+# define ROOM_EXIST		0
+# define NEW_ROOM		1
 
 typedef struct s_lem_in		t_lem_in;
 typedef struct s_room_list	t_room_list;
@@ -85,6 +87,8 @@ void	assign_room(char *line, int room_type);
 */
 
 int		hash_room(t_room *room);
+int		check_duplicate_hash(t_room_list **last, char *room_name);
+t_room	*get_room(char *key);
 
 /*
 ** Error

@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 	{
 		init_global();
 		read_map();
+		ft_printf("index 50 name: %s\n", g_hashtable[50].room->name);
 	}
 	return (0);
 }
