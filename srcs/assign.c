@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../includes/lem_in.h"
 
 int	assing_ants(char *line)
 {
@@ -30,13 +30,19 @@ void	assign_room(char *line, int room_type)
 {
 	t_room	*room;
 	char	**split;
+	int		hash_result;
 
 	room = (t_room *)malloc(sizeof(t_room));
 	//do start and end room
-	room->ant = 0;
+	ft_printf("%s\n", line);
+	if (room_type == 2)
+		ft_printf("%d\n", room_type);
 	split = ft_strsplit(line, ' ');
 	room->name = ft_strdup(split[0]);
-	//hash_room(room);
+	hash_result = hash_room(room);
+	if (hash_result != OK)
+		ft_printf("Oops, hash not gucci\n");
+	room->x = ft_atoi(split[1]);
+	room->y = ft_atoi(split[2]);
 	ft_strdel(split);
-	ft_printf("\nroom: %s | type: %d\n", line, room_type);
 }

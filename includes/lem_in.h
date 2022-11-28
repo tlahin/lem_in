@@ -25,23 +25,23 @@
 # define HASH_SIZE		12000
 # define STRING_SIZE	1000000
 
-extern int					g_ant;
-
 typedef struct s_lem_in		t_lem_in;
-typedef struct s_hash		t_hash;
+typedef struct s_room_list	t_room_list;
 typedef struct s_room		t_room;
 typedef struct s_line		t_line;
 
-struct s_hash
+struct s_room_list
 {
-	t_room	*room;
-	t_hash	*next;
+	t_room		*room;
+	t_room_list	*next;
 };
 
 struct s_room
 {
-	char			*name;
-	int				ant;
+	char		*name;
+	int			ant;
+	int			x;
+	int			y;
 };
 
 struct s_line
@@ -50,6 +50,13 @@ struct s_line
 	int	end;
 	int	index;
 };
+
+/*
+** Globals
+*/
+
+extern int					g_ant;
+extern t_room_list			g_hashtable[HASH_SIZE];
 
 /*
 ** Main stuff
@@ -72,6 +79,12 @@ void		read_command(char *line, int *room_type);
 
 int		assing_ants(char *line);
 void	assign_room(char *line, int room_type);
+
+/*
+** Hash
+*/
+
+int		hash_room(t_room *room);
 
 /*
 ** Error

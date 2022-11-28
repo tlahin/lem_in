@@ -12,8 +12,8 @@
 
 #include "../includes/lem_in.h"
 
-int		g_ant;
-t_hash	*g_hashtable[HASH_SIZE];
+int			g_ant;
+t_room_list	g_hashtable[HASH_SIZE];
 
 int	main(int ac, char **av)
 {

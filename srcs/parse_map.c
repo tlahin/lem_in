@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "../includes/lem_in.h"
 
 static void	process_line(char *line, int *stage)
 {
@@ -60,9 +60,8 @@ static void	parse_map(int ret, char *str)
 int	read_map(void)
 {
 	int		ret;
-	char	*str;
+	char	str[STRING_SIZE];
 
-	str = NULL;
 	ret = read(0, str, STRING_SIZE);
 	parse_map(ret, str);
 	return (OK);
