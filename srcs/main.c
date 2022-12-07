@@ -12,11 +12,11 @@
 
 #include "../includes/lem_in.h"
 
-int			g_ant;
-t_room_list	g_hashtable[HASH_SIZE];
+t_hash_table	g_hash_table[HASH_SIZE];
 
 int	main(int ac, char **av)
 {
+	t_parser		parser;
 
 	if (av[0])
 		ft_printf("\n");
@@ -24,9 +24,8 @@ int	main(int ac, char **av)
 		ft_printf("Input file error\n");
 	else
 	{
-		init_global();
-		read_map();
-		ft_printf("index 50 name: %s\n", g_hashtable[50].room->name);
+		init_parser(&parser);
+		parse_map(&parser);
 	}
 	return (0);
 }

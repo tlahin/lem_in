@@ -12,14 +12,14 @@
 
 #include "../includes/lem_in.h"
 
-static void	process_line(char *line, int *stage)
+static void	process_line(char *line, int *stage, t_parser *p)
 {
 	static int	room_type;
 
 	if (line[0] != '#')
 	{
 		check_valid_line(line);
-		if (assing_ants(line))
+		if (assing_ants(line, p))
 			return ;
 		if (*stage == 1 || ft_strchr(line, '-'))
 		{
@@ -28,7 +28,7 @@ static void	process_line(char *line, int *stage)
 		}
 		else
 		{
-			assign_room(line, room_type);
+			assign_room(line, room_type, p);
 			room_type = NORMAL_ROOM;
 		}
 	}
@@ -36,7 +36,7 @@ static void	process_line(char *line, int *stage)
 		read_command(line, &room_type);
 }
 
-static void	parse_map(int ret, char *str)
+int	parse_map(t_parser *parser)
 {
 	t_line	line;
 	char	current_line[500];
@@ -45,24 +45,15 @@ static void	parse_map(int ret, char *str)
 	line.start = 0;
 	line.end = 0;
 	stage = 0;
-	while (line.start < ret)
+	while (line.start < parser->read_amount)
 	{
 		line.index = 0;
-		while (str[line.end] != '\n' && line.end < ret)
-			current_line[line.index++] = str[line.end++];
+		while (parser->map[line.end] != '\n' && line.end < parser->read_amount)
+			current_line[line.index++] = parser->map[line.end++];
 		current_line[line.index] = 0;
-		process_line(current_line, &stage);
+		process_line(current_line, &stage, parser);
 		line.end++;
 		line.start = line.end;
 	}
-}
-
-int	read_map(void)
-{
-	int		ret;
-	char	str[STRING_SIZE];
-
-	ret = read(0, str, STRING_SIZE);
-	parse_map(ret, str);
 	return (OK);
 }

@@ -1,8 +1,12 @@
 //header
 
-#include "lem_in.h"
+#include "../includes/lem_in.h"
 
-void    init_global(void)
+void	init_parser(t_parser *parser)
 {
-    g_ant = 0;
+	char	str[STRING_SIZE];
+
+	parser->ants = 0;
+	parser->read_amount = read(1, str, STRING_SIZE);
+	parser->map = str;
 }
