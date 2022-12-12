@@ -25,12 +25,11 @@
 # define HASH_SIZE		12000
 # define STRING_SIZE	1000000
 
-typedef struct s_room_list	t_room_list;
 typedef struct s_room		t_room;
 typedef struct s_line		t_line;
 typedef struct s_parser		t_parser;
 typedef struct s_lemin		t_lemin;
-typedef struct s_hash_table	t_hash_table;
+typedef struct s_table		t_table;
 
 struct s_room
 {
@@ -41,7 +40,7 @@ struct s_room
 	int		**links;
 };
 
-struct s_hash_table
+struct s_table
 {
 	t_room			*room;
 	t_hash_table	*next;
@@ -90,7 +89,6 @@ void	assign_room(char *line, int room_type, t_parser *parser);
 */
 
 int		hash_room(t_room *room);
-int		check_existing_slot(t_room_list **last, char *room_name);
 t_room	*get_room(char *key);
 
 /*

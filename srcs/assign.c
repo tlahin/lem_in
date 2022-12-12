@@ -37,6 +37,7 @@ void	assign_room(char *line, int room_type, t_parser *p)
 	room->name = ft_strdup(split[0]);
 	room->x = ft_strdup(split[1]);
 	room->y = ft_strdup(split[2]);
+	//todo
 	check_valid_room(room);
 	hash_result = hash_room(room);
 	ft_arrdel(&split);
