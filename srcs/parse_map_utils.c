@@ -30,3 +30,21 @@ int	check_valid_line(char *line)
 	}
 	return (OK);
 }
+
+void	validate_ants(char c)
+{
+	if (!ft_isdigit(c))
+	{
+		ft_printf("ERROR: What kind of ant is this???\n");
+		//teminate_program();
+	}
+}
+
+void	check_ant_amount(t_parser *p)
+{
+	if (p->ants < 1)
+	{
+		ft_printf("ERROR: Bad ant amount\n");
+		//teminate_program();
+	}
+}

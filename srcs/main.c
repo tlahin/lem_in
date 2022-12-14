@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-t_hash_table	g_hash_table[HASH_SIZE];
+t_table	g_table[HASH_SIZE];
 
 int	main(int ac, char **av)
 {
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 		ft_printf("Input file error\n");
 	else
 	{
-		init_parser(&parser);
 		parse_map(&parser);
 	}
 	return (0);

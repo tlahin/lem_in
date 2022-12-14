@@ -33,7 +33,7 @@ static unsigned int	hash_value(char *key)
 	return (value);
 }
 
-int	check_existing_slot(t_room_list **last, char *room_name)
+int	check_existing_slot(t_table **last, char *room_name)
 {
 	t_table *new_collision;
 

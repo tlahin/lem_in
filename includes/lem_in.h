@@ -43,7 +43,7 @@ struct s_room
 struct s_table
 {
 	t_room			*room;
-	t_hash_table	*next;
+	t_table	*next;
 };
 
 struct s_line
@@ -60,14 +60,13 @@ struct s_parser
 	int		read_amount;
 };
 
-extern t_hash_table g_table[HASH_SIZE];
+extern t_table g_table[HASH_SIZE];
 
 /*
 ** Main stuff
 */
 
 int		main(int ac, char **av);
-void	init_parser(t_parser *parser);
 
 /*
 ** Map processing
@@ -88,6 +87,7 @@ void	assign_room(char *line, int room_type, t_parser *parser);
 ** Hash
 */
 
+int		check_existing_slot(t_table **last, char *room_name);
 int		hash_room(t_room *room);
 t_room	*get_room(char *key);
 
@@ -96,6 +96,6 @@ t_room	*get_room(char *key);
 */
 
 void	validate_ants(char c);
-void	check_ant_amount(void);
+void	check_ant_amount(t_parser *p);
 
 #endif

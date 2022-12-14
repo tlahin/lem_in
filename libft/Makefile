@@ -24,7 +24,7 @@ SRCS =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c \
 	ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c \
 	get_next_line.c ft_sqrt.c ft_intlen.c ft_strndup.c ft_str_toupper.c \
-	ft_itoa_base.c ft_number_size.c ft_number_size_base.c ft_powl.c \
+	ft_itoa_base.c ft_number_size.c ft_number_size_base.c ft_powl.c ft_arrdel.c \
 
 PRINTF_INCS = -I. -I./ft_printf/includes
 PRINTF_DIR = ft_printf/sources/

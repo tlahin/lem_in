@@ -22,7 +22,7 @@ int	assing_ants(char *line, t_parser *p)
 	while (line[i] != 0)
 		validate_ants(line[i++]);
 	p->ants = ft_atoi(line);
-	check_ant_amount();
+	check_ant_amount(p);
 	return (1);
 }
 
@@ -35,12 +35,11 @@ void	assign_room(char *line, int room_type, t_parser *p)
 	room = (t_room *)malloc(sizeof(t_room));
 	split = ft_strsplit(line, ' ');
 	room->name = ft_strdup(split[0]);
-	room->x = ft_strdup(split[1]);
-	room->y = ft_strdup(split[2]);
+	room->x = ft_atoi(split[1]);
+	room->y = ft_atoi(split[2]);
 	//todo
-	check_valid_room(room);
+	//check_valid_room(room);
 	hash_result = hash_room(room);
 	ft_arrdel(&split);
 	ft_printf("%s\n", line);
-
 }
