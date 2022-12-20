@@ -23,12 +23,12 @@ static void	process_line(char *line, int *stage, t_parser *p)
 			return ;
 		if (*stage == 1 || ft_strchr(line, '-'))
 		{
-			//links
+			assign_link(line);
 			*stage = 1;
 		}
 		else
 		{
-			assign_room(line, room_type, p);
+			assign_room(line, room_type);
 			room_type = NORMAL_ROOM;
 		}
 	}

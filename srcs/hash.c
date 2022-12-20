@@ -70,7 +70,7 @@ t_room	*get_room(char *key)
 	if (key)
 	{
 		tmp = &g_table[hash_value(key)];
-		while (tmp->room && ft_strcmp(tmp->room, key) != 0)
+		while (tmp->room->name && ft_strcmp(tmp->room->name, key) != 0)
 			tmp = tmp->next;
 		if (tmp)
 			return (tmp->room);

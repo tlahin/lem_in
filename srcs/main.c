@@ -16,7 +16,7 @@ t_table	g_table[HASH_SIZE];
 
 int	main(int ac, char **av)
 {
-	t_parser		parser;
+	t_parser	parser;
 
 	if (av[0])
 		ft_printf("\n");
