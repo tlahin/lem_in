@@ -14,7 +14,7 @@
 
 void	read_command(char *line, int *room_type)
 {
-	//check dups
+	check_duplicate_command(*room_type);
 	if (!ft_strcmp(line, "##start"))
 		*room_type = START_ROOM;
 	else if (!ft_strcmp(line, "##end"))

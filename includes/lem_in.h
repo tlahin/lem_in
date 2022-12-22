@@ -87,6 +87,7 @@ int		main(int ac, char **av);
 int		parse_map(t_parser *parser);
 int		check_valid_line(char *line);
 void	read_command(char *line, int *room_type);
+void	check_duplicate_command(int room_type);
 
 /*
 ** Assign

@@ -56,14 +56,14 @@ void	assign_room(char *line, int room_type)
 void	assign_link(char *line)
 {
 	char	**split;
-	t_room	*r1;
-	t_room	*r2;
+	t_room	*room_1;
+	t_room	*room_2;
 
 	split = ft_strsplit(line, '-');
-	r1 = get_room(split[0]);
-	r2 = get_room(split[1]);
-	check_valid_link(r1, r2, split, line);
-	add_elist(r1, r2);
-	add_elist(r2, r1);
+	room_1 = get_room(split[0]);
+	room_2 = get_room(split[1]);
+	check_valid_link(room_1, room_2, split, line);
+	add_elist(room_1, room_2);
+	add_elist(room_2, room_1);
 	ft_arrdel(&split);
 }
