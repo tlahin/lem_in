@@ -2,11 +2,11 @@
 
 #include "../includes/lem_in.h"
 
-void	check_link_exist(int link_stage)
+void	check_links(int stage)
 {
-	if (link_stage == 0)
+	if (stage == 0)
 	{
-		ft_printf("ERROR: No links found\n");
+		ft_printf("ERROR: No valid links\n");
 		teminate_program();
 	}
 }
@@ -15,7 +15,7 @@ static int	check_empty_room(t_room *r1, t_room *r2)
 {
 	if (!r1 || !r2)
 	{
-		ft_printf("ERROR: Invalid line found\n");
+		ft_printf("ERROR: Invalid line\n");
 		return (FAIL);
 	}
 	return (OK);
@@ -30,7 +30,7 @@ static int	check_duplicate_link(t_room *a, t_room *b)
 	{
 		if (ft_strcmp(temp->to->name, b->name) == 0)
 		{
-			ft_printf("ERROR: Duplicate links found\n");
+			ft_printf("ERROR: Duplicate links\n");
 			return (FAIL);
 		}
 		temp = temp->next;

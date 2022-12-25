@@ -115,10 +115,12 @@ void	validate_ants(char c);
 void	check_ant_amount(t_parser *p);
 void	check_malloc(void *mem);
 
+void	check_missing_special(void);
 void	check_duplicates_special(t_room *room, int room_state);
 void	check_valid_room(char **split, t_room *room, char *line, int hsh_result);
 int		check_multiple_char(char *line, char c, int ammount);
 
+void	check_links(int stage);
 void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line);
 
 /*
