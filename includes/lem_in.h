@@ -25,6 +25,8 @@
 # define HASH_SIZE		12000
 # define STRING_SIZE	1000000
 
+# define NOT_FOUND		0
+
 typedef struct s_room		t_room;
 typedef struct s_link		t_link;
 typedef struct s_line		t_line;

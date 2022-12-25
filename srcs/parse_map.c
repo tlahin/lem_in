@@ -55,5 +55,7 @@ int	parse_map(t_parser *parser)
 		line.end++;
 		line.start = line.end;
 	}
+	check_missing_special();
+	//check_link_exist(stage);
 	return (OK);
 }
