@@ -44,3 +44,14 @@ void	check_malloc(void *mem)
 		teminate_program();
 	}
 }
+
+int	check_valid_line(char *line)
+{
+	if (line[0] == 0 || line[0] == '\n' || line[0] == 'L')
+	{
+		ft_printf("ERROR: bad line\n");
+		return (FAIL);
+	}
+	return (OK);
+}
+

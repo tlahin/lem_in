@@ -87,9 +87,7 @@ int		main(int ac, char **av);
 */
 
 int		parse_map(t_parser *parser);
-int		check_valid_line(char *line);
 void	read_command(char *line, int *room_type);
-void	check_duplicate_command(int room_type);
 
 /*
 ** Assign
@@ -111,17 +109,24 @@ t_room	*get_room(char *key);
 ** Error
 */
 
+//error
 void	validate_ants(char c);
 void	check_ant_amount(t_parser *p);
 void	check_malloc(void *mem);
-
-void	check_missing_special(void);
+int		check_valid_line(char *line);
 void	check_duplicates_special(t_room *room, int room_state);
+
+//rooms
 void	check_valid_room(char **split, t_room *room, char *line, int hsh_result);
 int		check_multiple_char(char *line, char c, int ammount);
 
+//links
 void	check_links(int stage);
 void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line);
+
+//special
+void	check_missing_special(void);
+void	check_duplicate_command(int room_type);
 
 /*
 ** Free

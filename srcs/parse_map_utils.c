@@ -20,13 +20,3 @@ void	read_command(char *line, int *room_type)
 	else if (!ft_strcmp(line, "##end"))
 		*room_type = END_ROOM;
 }
-
-int	check_valid_line(char *line)
-{
-	if (line[0] == 0 || line[0] == '\n' || line[0] == 'L')
-	{
-		ft_printf("ERROR: bad line\n");
-		return (FAIL);
-	}
-	return (OK);
-}
