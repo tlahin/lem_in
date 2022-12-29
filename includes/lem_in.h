@@ -83,6 +83,12 @@ extern t_table g_table[HASH_SIZE];
 int		main(int ac, char **av);
 
 /*
+** Init
+*/
+
+void	init_parser(t_parser *parser);
+
+/*
 ** Map processing
 */
 
@@ -144,5 +150,11 @@ void	free_everything(void);
 t_link	*add_elist(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
 void	teminate_program(void);
+
+/*
+** Bfs
+*/
+
+int		bfs(t_link *start);
 
 #endif
