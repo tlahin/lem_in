@@ -22,3 +22,28 @@ void	check_missing_special(void)
 		teminate_program();
 	}
 }
+
+void	check_special_path(int path)
+{
+	if (path == NOT_FOUND)
+	{
+		ft_printf("ERROR: not path available\n");
+		teminate_program();
+	}
+}
+
+void	check_duplicate_special(t_room *room, int room_type)
+{
+	if (room_type == START_ROOM && g_table != NULL)
+	{
+		ft_printf("ERROR: duplicate start\n");
+		free(room);
+		teminate_program();
+	}
+	if (room_type == END_ROOM && g_table != NULL)
+	{
+		ft_printf("ERROR: duplicate end\n");
+		free(room);
+		teminate_program();
+	}
+}
