@@ -17,6 +17,8 @@ t_table	g_table[HASH_SIZE];
 int	main(int ac, char **av)
 {
 	t_parser	parser;
+	t_link		start_link;
+	int			path;
 
 	if (av[0])
 		ft_printf("\n");
@@ -25,6 +27,15 @@ int	main(int ac, char **av)
 	else
 	{
 		parse_map(&parser);
+		set_link(&start_link, g_table->start, g_table->start, 0);
+		while (bfs(&start_link))
+		{
+			//find_path();
+			path = 1;
+		}
+		g_table->start->ant = parser.ants;
+		//check_special_path(path);
+		free_everything();
 	}
 	return (0);
 }
