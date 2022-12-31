@@ -10,3 +10,11 @@ void	init_parser(t_parser *parser)
 	parser->read_amount = read(1, str, STRING_SIZE);
 	parser->map = str;
 }
+
+void	init_que(t_que *q, t_link *start)
+{
+	q->que[0] = start;
+	q->remaining = 1;
+	q->count = 1;
+	q->index = 0;
+}

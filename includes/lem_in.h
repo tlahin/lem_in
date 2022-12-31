@@ -23,8 +23,10 @@
 # define START_ROOM		-1
 # define END_ROOM		1
 # define HASH_SIZE		12000
+# define MAGIC_NUMBER	30000
 # define STRING_SIZE	1000000
 
+# define FOUND			1
 # define NOT_FOUND		0
 
 typedef struct s_room		t_room;
@@ -33,6 +35,8 @@ typedef struct s_line		t_line;
 typedef struct s_parser		t_parser;
 typedef struct s_lemin		t_lemin;
 typedef struct s_table		t_table;
+typedef struct s_que		t_que;
+typedef struct s_tracker	t_tracker;
 
 struct s_room
 {
@@ -74,6 +78,21 @@ struct s_parser
 	int		read_amount;
 };
 
+struct	s_que
+{
+	int		count;
+	int		index;
+	int		path;
+	int		remaining;
+	t_link	*que[MAGIC_NUMBER];
+};
+
+struct s_tracker
+{
+	int	index;
+	int	steps;
+};
+
 extern t_table g_table[HASH_SIZE];
 
 /*
@@ -87,6 +106,7 @@ int		main(int ac, char **av);
 */
 
 void	init_parser(t_parser *parser);
+void	init_que(t_que *q, t_link *start);
 
 /*
 ** Map processing
