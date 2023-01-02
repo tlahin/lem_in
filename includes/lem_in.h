@@ -29,6 +29,10 @@
 # define FOUND			1
 # define NOT_FOUND		0
 
+# define UNUSED			0
+# define BACKWARD		-1
+# define USED_FORWARD	1
+
 typedef struct s_room		t_room;
 typedef struct s_link		t_link;
 typedef struct s_line		t_line;
@@ -41,10 +45,13 @@ typedef struct s_tracker	t_tracker;
 struct s_room
 {
 	char	*name;
+	int		steps;
 	int		ant;
 	int		x;
 	int		y;
 	t_link	*link;
+	t_room	*prev;
+	t_room	*next;
 };
 
 struct s_link
@@ -93,7 +100,8 @@ struct s_tracker
 	int	steps;
 };
 
-extern t_table g_table[HASH_SIZE];
+extern t_table	g_table[HASH_SIZE];
+extern int		g_crossed;
 
 /*
 ** Main stuff
@@ -107,6 +115,7 @@ int		main(int ac, char **av);
 
 void	init_parser(t_parser *parser);
 void	init_que(t_que *q, t_link *start);
+void	init_path(int *r_index, int *backward_link_used, t_room **old);
 
 /*
 ** Map processing
@@ -170,11 +179,33 @@ void	free_everything(void);
 t_link	*add_elist(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
 void	teminate_program(void);
+void	set_tracker(t_tracker *tracker, int index, int steps);
 
 /*
 ** Bfs
 */
 
 int		bfs(t_link *start);
+
+/*
+** Search
+*/
+
+int	search(t_link **que, int *q_count, int idx, t_tracker *tracker);
+
+/*
+** Augment
+*/
+
+int	augment(t_link *rev_link, int r_index, t_room *old_long_room, int backward);
+
+/*
+** Augment utilities
+*/
+
+void	set_flow(t_link *list, t_room *target_room, int flow);
+void	delete_forward_room(t_room *room);
+void	delete_prev_room(t_room *room);
+void	remove_old_longer_path(t_room *room);
 
 #endif

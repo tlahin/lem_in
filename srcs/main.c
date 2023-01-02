@@ -13,6 +13,7 @@
 #include "../includes/lem_in.h"
 
 t_table	g_table[HASH_SIZE];
+int		g_crossed;
 
 int	main(int ac, char **av)
 {

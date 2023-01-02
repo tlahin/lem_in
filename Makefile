@@ -14,7 +14,8 @@ NAME = lem-in
 
 SRCS_DIR = srcs/
 SRCS = main parse_map parse_map_utils init assign error hash free utilities \
-	error_room error_link error_special bfs 
+	error_room error_link error_special bfs search augment augment_utilities \
+	
 
 OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS)))

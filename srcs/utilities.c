@@ -22,6 +22,12 @@ void	set_link(t_link *link, t_room *from, t_room *to, int flow)
 	link->crossed = 0;
 }
 
+void	set_tracker(t_tracker *tracker, int index, int steps)
+{
+	tracker->index = index;
+	tracker->steps = steps;
+}
+
 void	teminate_program(void)
 {
 	free_everything();
