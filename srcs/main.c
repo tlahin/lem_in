@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 {
 	t_parser	parser;
 	t_link		start_link;
-	int			path;
+	int			path_found;
 
 	if (ac != 1 || av[1])
 		ft_printf("Input file error\n");
@@ -30,11 +30,11 @@ int	main(int ac, char **av)
 		set_link(&start_link, g_table->start, g_table->start, 0);
 		while (bfs(&start_link))
 		{
-			//find_path();
-			path = 1;
+			pathfinder();
+			path_found = 1;
 		}
 		g_table->start->ant = parser.ants;
-		check_special_path(path);
+		check_special_path(path_found);
 		free_everything();
 	}
 	return (0);
