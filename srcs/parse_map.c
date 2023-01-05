@@ -36,20 +36,22 @@ static void	process_line(char *line, int *stage)
 		read_command(line, &room_type);
 }
 
-int	parse_map(t_parser *parser)
+int	parse_map()
 {
 	t_line	line;
 	char	current_line[500];
 	int		stage;
+	int		read_amount;
 
 	line.start = 0;
 	line.end = 0;
 	stage = 0;
-	while (line.start < parser->read_amount)
+	read_amount = read(0, g_map, STRING_SIZE);
+	while (line.start < read_amount)
 	{
 		line.index = 0;
-		while (parser->map[line.end] != '\n' && line.end < parser->read_amount)
-			current_line[line.index++] = parser->map[line.end++];
+		while (g_map[line.end] != '\n' && line.end < read_amount)
+			current_line[line.index++] = g_map[line.end++];
 		current_line[line.index] = 0;
 		process_line(current_line, &stage);
 		line.end++;

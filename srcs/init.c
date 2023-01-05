@@ -12,14 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-void	init_parser(t_parser *parser)
-{
-	char	str[STRING_SIZE];
-
-	parser->read_amount = read(1, str, STRING_SIZE);
-	parser->map = str;
-}
-
 void	init_que(t_que *q, t_link *start)
 {
 	q->que[0] = start;
@@ -42,4 +34,14 @@ void	init_globals(int *path_found)
 	g_optimal_path_count = 0;
 	g_optimal_line_count = 0;
 	*path_found = 0;
+	g_map = (char *)ft_memalloc(sizeof(char) * STRING_SIZE);
+	check_malloc((void *)g_map);
+
+}
+
+void	init_ant_movement(t_ant_distr *distr)
+{
+	distr->str_size = STRING_SIZE;
+	distr->line = (char *)ft_memalloc(sizeof(char) * distr->str_size);
+	check_malloc(distr->line);
 }

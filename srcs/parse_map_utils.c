@@ -20,3 +20,30 @@ void	read_command(char *line, int *room_type)
 	else if (!ft_strcmp(line, "##end"))
 		*room_type = END_ROOM;
 }
+
+void	double_str_size(void **mem, int size)
+{
+	char	*insurance_str;
+
+	insurance_str = (char *)ft_memalloc(sizeof(char) * (size * 2));
+	check_malloc((void *)insurance_str);
+	ft_memcpy(insurance_str, *mem, size);
+	free(*mem);
+	*mem = insurance_str;
+}
+
+void	insurance_reading(int *ret)
+{
+	int	total;
+
+	if (*ret < STRING_SIZE)
+		return ;
+	total = *ret;
+	while (*ret > 0)
+	{
+		double_str_size((void **)&g_map, total);
+		*ret = read(0, &g_map[total], total);
+		total += *ret;
+	}
+	*ret = total;
+}

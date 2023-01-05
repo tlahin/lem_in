@@ -42,6 +42,7 @@ typedef struct s_table		t_table;
 typedef struct s_que		t_que;
 typedef struct s_tracker	t_tracker;
 typedef struct s_path		t_path;
+typedef struct s_ant_distr	t_ant_distr;
 
 struct s_room
 {
@@ -80,12 +81,6 @@ struct s_line
 	int	index;
 };
 
-struct s_parser
-{
-	char	*map;
-	int		read_amount;
-};
-
 struct	s_que
 {
 	int		count;
@@ -108,11 +103,18 @@ struct s_path
 	t_room	**rooms;
 };
 
+struct s_ant_distr
+{
+	int		str_size;
+	char	*line;
+};
+
 extern t_table	g_table[HASH_SIZE];
 extern int		g_crossed;
 extern int		g_optimal_path_count;
 extern int		g_optimal_line_count;
 extern t_path	*g_optimal_paths[MAGIC_NUMBER];
+extern char		*g_map;
 
 /*
 ** Main stuff
@@ -125,16 +127,18 @@ int		main(int ac, char **av);
 */
 
 void	init_globals(int *path_found);
-void	init_parser(t_parser *parser);
 void	init_que(t_que *q, t_link *start);
 void	init_path(int *r_index, int *backward_link_used, t_room **old);
+void	init_ant_movement(t_ant_distr *distr);
 
 /*
 ** Map processing
 */
 
-int		parse_map(t_parser *parser);
+int		parse_map(void);
 void	read_command(char *line, int *room_type);
+void	double_str_size(void **mem, int size);
+void	insurance_reading(int *ret);
 
 /*
 ** Assign
@@ -232,5 +236,12 @@ int		pathfinder(void);
 */
 
 void	sort_paths(t_path **path, int low, int high);
+
+/*
+** Mover
+*/
+
+void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num);
+void	move_the_bois(void);
 
 #endif
