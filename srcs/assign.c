@@ -21,17 +21,17 @@ static void	do_start_end(t_room *room, int room_type)
 		g_table->end = room;
 }
 
-int	assing_ants(char *line, t_parser *p)
+int	assing_ants(char *line)
 {
 	int	i;
 
-	if (p->ants != 0)
+	if (g_table->ants != 0)
 		return (0);
 	i = 0;
 	while (line[i] != 0)
 		validate_ants(line[i++]);
-	p->ants = ft_atoi(line);
-	check_ant_amount(p);
+	g_table->ants = ft_atoi(line);
+	check_ant_amount();
 	return (1);
 }
 

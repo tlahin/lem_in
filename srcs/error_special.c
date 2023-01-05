@@ -44,13 +44,13 @@ void	check_special_path(int path)
 
 void	check_duplicate_special(t_room *room, int room_type)
 {
-	if (room_type == START_ROOM && g_table != NULL)
+	if (room_type == START_ROOM && g_table->start != NULL)
 	{
 		ft_printf("ERROR: duplicate start\n");
 		free(room);
 		teminate_program();
 	}
-	if (room_type == END_ROOM && g_table != NULL)
+	if (room_type == END_ROOM && g_table->end != NULL)
 	{
 		ft_printf("ERROR: duplicate end\n");
 		free(room);

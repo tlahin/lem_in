@@ -12,6 +12,19 @@
 
 #include "../includes/lem_in.h"
 
+void	free_path(t_path **paths, int p_count)
+{
+	int	i;
+
+	i = 0;
+	while (i < p_count)
+	{
+		ft_memdel((void **)&paths[i]->rooms);
+		ft_memdel((void **)&paths[i]);
+		i++;
+	}
+}
+
 void	free_room_content(t_room *room)
 {
 	t_link	*link;

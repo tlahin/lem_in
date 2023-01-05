@@ -16,7 +16,6 @@ void	init_parser(t_parser *parser)
 {
 	char	str[STRING_SIZE];
 
-	parser->ants = 0;
 	parser->read_amount = read(1, str, STRING_SIZE);
 	parser->map = str;
 }
@@ -34,4 +33,13 @@ void	init_path(int *r_index, int *backward_link_used, t_room **old)
 	*r_index = 0;
 	*backward_link_used = 0;
 	*old = NULL;
+}
+
+void	init_globals(int *path_found)
+{
+	g_crossed = 1;
+	g_table->ants = 0;
+	g_optimal_path_count = 0;
+	g_optimal_line_count = 0;
+	*path_found = 0;
 }

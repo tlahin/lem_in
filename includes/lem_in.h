@@ -41,6 +41,7 @@ typedef struct s_lemin		t_lemin;
 typedef struct s_table		t_table;
 typedef struct s_que		t_que;
 typedef struct s_tracker	t_tracker;
+typedef struct s_path		t_path;
 
 struct s_room
 {
@@ -69,6 +70,7 @@ struct s_table
 	t_table	*next;
 	t_room	*start;
 	t_room	*end;
+	int		ants;
 };
 
 struct s_line
@@ -80,7 +82,6 @@ struct s_line
 
 struct s_parser
 {
-	int		ants;
 	char	*map;
 	int		read_amount;
 };
@@ -100,8 +101,18 @@ struct s_tracker
 	int	steps;
 };
 
+struct s_path
+{
+	int		total_steps;
+	int		ant_count;
+	t_room	**rooms;
+};
+
 extern t_table	g_table[HASH_SIZE];
 extern int		g_crossed;
+extern int		g_optimal_path_count;
+extern int		g_optimal_line_count;
+extern t_path	*g_optimal_paths[MAGIC_NUMBER];
 
 /*
 ** Main stuff
@@ -113,6 +124,7 @@ int		main(int ac, char **av);
 ** Init
 */
 
+void	init_globals(int *path_found);
 void	init_parser(t_parser *parser);
 void	init_que(t_que *q, t_link *start);
 void	init_path(int *r_index, int *backward_link_used, t_room **old);
@@ -128,7 +140,7 @@ void	read_command(char *line, int *room_type);
 ** Assign
 */
 
-int		assing_ants(char *line, t_parser *parser);
+int		assing_ants(char *line);
 void	assign_room(char *line, int room_type);
 void	assign_link(char *line);
 
@@ -146,7 +158,7 @@ t_room	*get_room(char *key);
 
 //error
 void	validate_ants(char c);
-void	check_ant_amount(t_parser *p);
+void	check_ant_amount(void);
 void	check_malloc(void *mem);
 int		check_valid_line(char *line);
 void	check_duplicates_special(t_room *room, int room_state);
@@ -169,6 +181,7 @@ void	check_duplicate_special(t_room *room, int room_type);
 ** Free
 */
 
+void	free_path(t_path **paths, int p_count);
 void	free_room_content(t_room *room);
 void	free_everything(void);
 
@@ -213,5 +226,11 @@ void	remove_old_longer_path(t_room *room);
 */
 
 int		pathfinder(void);
+
+/*
+** Sort
+*/
+
+void	sort_paths(t_path **path, int low, int high);
 
 #endif

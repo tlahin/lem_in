@@ -21,9 +21,9 @@ void	validate_ants(char c)
 	}
 }
 
-void	check_ant_amount(t_parser *p)
+void	check_ant_amount(void)
 {
-	if (p->ants < 1)
+	if (g_table->ants < 1)
 	{
 		ft_printf("ERROR: Invalid ant amount\n");
 		teminate_program();

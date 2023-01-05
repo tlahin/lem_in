@@ -12,14 +12,14 @@
 
 #include "../includes/lem_in.h"
 
-static void	process_line(char *line, int *stage, t_parser *p)
+static void	process_line(char *line, int *stage)
 {
 	static int	room_type;
 
 	if (line[0] != '#')
 	{
 		check_valid_line(line);
-		if (assing_ants(line, p))
+		if (assing_ants(line))
 			return ;
 		if (*stage == 1 || ft_strchr(line, '-'))
 		{
@@ -51,7 +51,7 @@ int	parse_map(t_parser *parser)
 		while (parser->map[line.end] != '\n' && line.end < parser->read_amount)
 			current_line[line.index++] = parser->map[line.end++];
 		current_line[line.index] = 0;
-		process_line(current_line, &stage, parser);
+		process_line(current_line, &stage);
 		line.end++;
 		line.start = line.end;
 	}
