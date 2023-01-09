@@ -42,17 +42,19 @@ void	assign_room(char *line, int room_type)
 	int		hash_result;
 
 	room = (t_room *)malloc(sizeof(t_room));
+	check_malloc(room);
 	do_start_end(room, room_type);
 	split = ft_strsplit(line, ' ');
 	room->name = ft_strdup(split[0]);
-	room->x = ft_atoi(split[1]);
-	room->y = ft_atoi(split[2]);
+	room->steps = 0;
 	room->ant = 0;
 	room->prev = NULL;
 	room->next = NULL;
 	room->link = NULL;
 	hash_result = hash_room(room);
 	check_valid_room(split, room, line, hash_result);
+	room->x = ft_atoi(split[1]);
+	room->y = ft_atoi(split[2]);
 	ft_arrdel(&split);
 }
 
@@ -66,7 +68,7 @@ void	assign_link(char *line)
 	room_1 = get_room(split[0]);
 	room_2 = get_room(split[1]);
 	check_valid_link(room_1, room_2, split, line);
-	add_elist(room_1, room_2);
-	add_elist(room_2, room_1);
+	add_links(room_1, room_2);
+	add_links(room_2, room_1);
 	ft_arrdel(&split);
 }

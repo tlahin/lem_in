@@ -29,7 +29,7 @@ static unsigned int	hash_value(char *key)
 	while (key[i])
 		value = value * 42 + key[i++];
 	value %= HASH_SIZE;
-	return (value);
+	return ((unsigned int)value);
 }
 
 int	check_existing_slot(t_table **last, char *room_name)
@@ -59,6 +59,7 @@ int	hash_room(t_room *room)
 	if (check_existing_slot(&last_slot, room->name) == 0)
 		return (0);
 	last_slot->next = (t_table *)ft_memalloc(sizeof(t_table));
+	check_malloc((void *)last_slot->next);
 	return (new_hash_slot(last_slot->next, room));
 }
 
@@ -69,7 +70,7 @@ t_room	*get_room(char *key)
 	if (key)
 	{
 		tmp = &g_table[hash_value(key)];
-		while (tmp->room->name && ft_strcmp(tmp->room->name, key) != 0)
+		while (tmp->room && ft_strcmp(tmp->room->name, key) != 0)
 			tmp = tmp->next;
 		if (tmp)
 			return (tmp->room);

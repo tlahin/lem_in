@@ -52,8 +52,8 @@ int	check_valid_line(char *line)
 {
 	if (line[0] == 0 || line[0] == '\n' || line[0] == 'L')
 	{
-		ft_printf("ERROR: Bad line\n");
-		return (FAIL);
+		ft_printf("ERROR: Invalid line\n");
+		free_and_exit();
 	}
 	return (OK);
 }

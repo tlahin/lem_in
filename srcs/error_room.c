@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-int	check_multiple_char(char *line, char c, int ammount)
+int	check_multiple_char(char *line, char c, int amount)
 {
 	int	i;
 	int	count;
@@ -22,7 +22,7 @@ int	check_multiple_char(char *line, char c, int ammount)
 	while (line[i])
 		if (line[i++] == c)
 			count++;
-	if (count != ammount)
+	if (count != amount)
 	{
 		ft_printf("ERROR: Invalid line\n");
 		return (FAIL);
@@ -60,11 +60,11 @@ static int	check_duplicate_room(int hash_result, t_room *room)
 	return (OK);
 }
 
-void	check_valid_room(char **split, t_room *room, char *line, int hsh_result)
+void	check_valid_room(char **split, t_room *room, char *line, int hash_result)
 {
 	if (check_multiple_char(line, ' ', 2) == FAIL
 		|| check_room_coordinates(split) == FAIL
-		|| check_duplicate_room(hsh_result, room) == FAIL)
+		|| check_duplicate_room(hash_result, room) == FAIL)
 	{
 		ft_arrdel(&split);
 		free_and_exit();

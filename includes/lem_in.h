@@ -177,7 +177,7 @@ void	check_empty_file(void);
 
 //rooms
 void	check_valid_room(char **split, t_room *room, char *line, int hsh_result);
-int		check_multiple_char(char *line, char c, int ammount);
+int		check_multiple_char(char *line, char c, int amount);
 
 //links
 void	check_links(int stage);
@@ -201,7 +201,7 @@ void	free_everything(void);
 ** Utilities
 */
 
-t_link	*add_elist(t_room *from_room, t_room *to_room);
+t_link	*add_links(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
 void	free_and_exit(void);
 void	set_tracker(t_tracker *tracker, int index, int steps);
@@ -260,18 +260,3 @@ void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num);
 void	ant_movement(void);
 
 #endif
-
-/*
-	Comment in link
-	empty line after ants
-	empty line between rooms and links
-	empty line in links
-	empty line in rooms
-	invalid room in link
-	invalid room name
-	link after end/start
-	missing room cordinate
-	mixed room link
-	link amongs rooms
-	room among links
-*/

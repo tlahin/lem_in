@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-t_link	*add_elist(t_room *from_room, t_room *to_room)
+t_link	*add_links(t_room *from_room, t_room *to_room)
 {
 	t_link	*link;
 
