@@ -57,4 +57,3 @@ int	check_valid_line(char *line)
 	}
 	return (OK);
 }
-

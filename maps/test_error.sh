@@ -13,7 +13,7 @@ do
 	printf "$f:\n" | rev | cut -d '/' -f 1 | rev >> "$RESULT_FILE"
 
 	#use leaks to check for memleaks
-	leaks -atExit -quiet -- "$LEM_IN_BINARY" < "$f" >> "$RESULT_FILE"
+	#leaks -atExit -quiet -- "$LEM_IN_BINARY" < "$f" >> "$RESULT_FILE"
 
 	#use valgrind instead (add # to leaks and remove for the next 3 lines)
 	# valgrind --leak-check=full --show-leak-kinds=all --log-file=valout "$LEM_IN_BINARY" < "$f" >> "$RESULT_FILE"

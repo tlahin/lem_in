@@ -117,12 +117,12 @@ struct s_ant_distr
 	char	*line;
 };
 
-extern t_table	g_table[HASH_SIZE];
-extern int		g_crossed;
-extern int		g_optimal_path_count;
-extern int		g_optimal_line_count;
-extern t_path	*g_optimal_paths[MAGIC_NUMBER];
-extern char		*g_map;
+extern t_table				g_table[HASH_SIZE];
+extern int					g_crossed;
+extern int					g_optimal_path_count;
+extern int					g_optimal_line_count;
+extern t_path				*g_paths[MAGIC_NUMBER];
+extern char					*g_map;
 
 /*
 ** Main stuff
@@ -168,22 +168,30 @@ t_room	*get_room(char *key);
 ** Error
 */
 
-//error
 void	validate_ants(char c);
 void	check_ant_amount(void);
 void	check_malloc(void *mem);
 int		check_valid_line(char *line);
 void	check_empty_file(void);
 
-//rooms
-void	check_valid_room(char **split, t_room *room, char *line, int hsh_result);
+/*
+** Room errors
+*/
+
+void	check_valid_room(char **split, t_room *room, char *line, int hash_ret);
 int		check_multiple_char(char *line, char c, int amount);
 
-//links
+/*
+** Link errors
+*/
+
 void	check_links(int stage);
 void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line);
 
-//special
+/*
+** Special errors
+*/
+
 void	check_missing_special(void);
 void	check_duplicate_command(int room_type);
 void	check_special_path(int path_found);
@@ -223,13 +231,13 @@ int		bfs(t_link *start);
 ** Search
 */
 
-int	search(t_link **que, int *q_count, int idx, t_tracker *tracker);
+int		search(t_link **que, int *q_count, int idx, t_tracker *tracker);
 
 /*
 ** Augment
 */
 
-int	augment(t_link *rev_link, int r_index, t_room *old_long_room, int backward);
+int		augment(t_link *rev_link, int r_index, t_room *long_room, int backward);
 
 /*
 ** Augment utilities

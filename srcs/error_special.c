@@ -25,7 +25,7 @@ void	check_missing_special(void)
 {
 	if (!g_table->start || !g_table->end)
 	{
-		if(g_table->start == NOT_FOUND)
+		if (g_table->start == NOT_FOUND)
 			ft_printf("ERROR: Start not found\n");
 		if (g_table->end == NOT_FOUND)
 			ft_printf("ERROR: End not found\n");

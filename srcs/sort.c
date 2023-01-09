@@ -44,7 +44,7 @@ static int	partition(t_path **path, int low, int high)
 
 void	sort_paths(t_path **path, int low, int high)
 {
-	int p_index;
+	int	p_index;
 
 	if (low < high)
 	{

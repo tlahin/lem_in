@@ -60,11 +60,11 @@ static int	check_duplicate_room(int hash_result, t_room *room)
 	return (OK);
 }
 
-void	check_valid_room(char **split, t_room *room, char *line, int hash_result)
+void	check_valid_room(char **split, t_room *room, char *line, int hash_ret)
 {
 	if (check_multiple_char(line, ' ', 2) == FAIL
 		|| check_room_coordinates(split) == FAIL
-		|| check_duplicate_room(hash_result, room) == FAIL)
+		|| check_duplicate_room(hash_ret, room) == FAIL)
 	{
 		ft_arrdel(&split);
 		free_and_exit();

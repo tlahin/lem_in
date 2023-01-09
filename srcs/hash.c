@@ -34,7 +34,7 @@ static unsigned int	hash_value(char *key)
 
 int	check_existing_slot(t_table **last, char *room_name)
 {
-	t_table *new_collision;
+	t_table	*new_collision;
 
 	new_collision = *last;
 	while (new_collision != NULL)
@@ -50,7 +50,7 @@ int	check_existing_slot(t_table **last, char *room_name)
 int	hash_room(t_room *room)
 {
 	unsigned int	index;
-	t_table	*last_slot;
+	t_table			*last_slot;
 
 	index = hash_value(room->name);
 	if (g_table[index].room == NULL)
@@ -65,7 +65,7 @@ int	hash_room(t_room *room)
 
 t_room	*get_room(char *key)
 {
-	t_table *tmp;
+	t_table	*tmp;
 
 	if (key)
 	{

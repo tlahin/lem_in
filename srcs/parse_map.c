@@ -36,7 +36,7 @@ static void	process_line(char *line, int *stage)
 		read_command(line, &room_type);
 }
 
-int	parse_map()
+int	parse_map(void)
 {
 	t_line	line;
 	char	current_line[500];

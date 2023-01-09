@@ -49,5 +49,3 @@ void	init_ant_movement(t_ant_distr *distr)
 	distr->line = (char *)ft_memalloc(sizeof(char) * distr->str_size);
 	check_malloc(distr->line);
 }
-
-

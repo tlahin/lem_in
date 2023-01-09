@@ -19,12 +19,12 @@ static void	delete_backward_link(t_link *rev_link, int i)
 		delete_prev_room(rev_link[i].from);
 }
 
-static void	mixed_augment(t_link *rev_link, int r_idx)
+static void	mixed_augment(t_link *rev_link, int r_i)
 {
 	int	i;
 	int	step_count;
 
-	i = r_idx;
+	i = r_i;
 	step_count = 1;
 	while (i > -1)
 	{
@@ -32,7 +32,7 @@ static void	mixed_augment(t_link *rev_link, int r_idx)
 			delete_backward_link(rev_link, i);
 		else
 		{
-			if (i < r_idx && rev_link[i + 1].flow == BACKWARD)
+			if (i < r_i && rev_link[i + 1].flow == BACKWARD)
 				step_count = rev_link[i].to->steps + 1;
 			rev_link[i].from->steps = step_count++;
 			if (i > 0 && rev_link[i - 1].flow == BACKWARD)
@@ -45,31 +45,31 @@ static void	mixed_augment(t_link *rev_link, int r_idx)
 	}
 }
 
-static void	pure_forward_augment(t_link *rev_link, int r_idx)
+static void	pure_forward_augment(t_link *rev_link, int r_i)
 {
 	int	step_count;
 
 	step_count = 1;
-	while (r_idx > -1)
+	while (r_i > -1)
 	{
-		set_flow(rev_link[r_idx].to->link, rev_link[r_idx].from, USED_FORWARD);
-		rev_link[r_idx].from->prev = rev_link[r_idx].to;
-		rev_link[r_idx].to->next = rev_link[r_idx].from;
-		rev_link[r_idx].from->steps = step_count++;
-		r_idx--;
+		set_flow(rev_link[r_i].to->link, rev_link[r_i].from, USED_FORWARD);
+		rev_link[r_i].from->prev = rev_link[r_i].to;
+		rev_link[r_i].to->next = rev_link[r_i].from;
+		rev_link[r_i].from->steps = step_count++;
+		r_i--;
 	}
 }
 
-int	augment(t_link *rev_link, int r_idx, t_room *old_long_room, int backward)
+int	augment(t_link *rev_link, int r_i, t_room *long_room, int backward)
 {
-	if (old_long_room != 0)
-		remove_old_longer_path(old_long_room);
-	if	(backward == BACKWARD)
+	if (long_room != 0)
+		remove_old_longer_path(long_room);
+	if (backward == BACKWARD)
 	{
-		mixed_augment(rev_link, r_idx - 1);
+		mixed_augment(rev_link, r_i - 1);
 		return (BACKWARD);
 	}
 	else
-		pure_forward_augment(rev_link, r_idx - 1);
+		pure_forward_augment(rev_link, r_i - 1);
 	return (USED_FORWARD);
 }

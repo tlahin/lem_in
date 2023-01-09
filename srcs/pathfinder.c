@@ -62,12 +62,12 @@ static void	set_optimal_path(t_path **paths, int p_count)
 	path_index = 0;
 	while (path_index < p_count)
 	{
-		g_optimal_paths[path_index] = paths[path_index];
+		g_paths[path_index] = paths[path_index];
 		room_index = 0;
-		room = g_optimal_paths[path_index]->rooms[room_index];
-		while (room_index < g_optimal_paths[path_index]->total_steps)
+		room = g_paths[path_index]->rooms[room_index];
+		while (room_index < g_paths[path_index]->total_steps)
 		{
-			g_optimal_paths[path_index]->rooms[room_index] = room;
+			g_paths[path_index]->rooms[room_index] = room;
 			room_index++;
 			room = room->next;
 		}
@@ -90,7 +90,9 @@ static int	set_paths(t_path **path)
 			check_malloc((void *)path[p_count]);
 			path[p_count]->ant_count = 0;
 			path[p_count]->total_steps = count_steps(tmp->to);
-			path[p_count]->rooms = (t_room **)ft_memalloc(sizeof(t_room *) * path[p_count]->total_steps);
+			path[p_count]->rooms
+				= (t_room **)
+				ft_memalloc(sizeof(t_room *) * path[p_count]->total_steps);
 			check_malloc((void *)path[p_count]);
 			path[p_count]->rooms[0] = tmp->to;
 			p_count++;
@@ -101,7 +103,7 @@ static int	set_paths(t_path **path)
 	return (p_count);
 }
 
-int		pathfinder(void)
+int	pathfinder(void)
 {
 	int		line_count;
 	int		p_count;
@@ -113,7 +115,7 @@ int		pathfinder(void)
 	if (line_count < g_optimal_line_count || g_optimal_line_count == 0)
 	{
 		if (g_optimal_path_count != 0)
-			free_path(g_optimal_paths, g_optimal_path_count);
+			free_path(g_paths, g_optimal_path_count);
 		set_optimal_path(paths, p_count);
 		g_optimal_line_count = line_count;
 		g_optimal_path_count = p_count;
