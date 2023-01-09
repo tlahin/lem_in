@@ -67,6 +67,6 @@ void	check_valid_room(char **split, t_room *room, char *line, int hsh_result)
 		|| check_duplicate_room(hsh_result, room) == FAIL)
 	{
 		ft_arrdel(&split);
-		kill_and_quit();
+		free_and_exit();
 	}
 }

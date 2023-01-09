@@ -38,7 +38,7 @@ void	set_tracker(t_tracker *tracker, int index, int steps)
 	tracker->steps = steps;
 }
 
-void	kill_and_quit(void)
+void	free_and_exit(void)
 {
 	free_everything();
 	exit(0);

@@ -17,7 +17,7 @@ void	validate_ants(char c)
 	if (!ft_isdigit(c))
 	{
 		ft_printf("ERROR: Invalid ants\n");
-		kill_and_quit();
+		free_and_exit();
 	}
 }
 
@@ -26,7 +26,7 @@ void	check_ant_amount(void)
 	if (g_table->ants < 1)
 	{
 		ft_printf("ERROR: Invalid ant amount\n");
-		kill_and_quit();
+		free_and_exit();
 	}
 }
 
@@ -35,7 +35,7 @@ void	check_empty_file(void)
 	if (g_map[0] == 0)
 	{
 		ft_printf("ERROR: No map found\n");
-		kill_and_quit();
+		free_and_exit();
 	}
 }
 
@@ -44,7 +44,7 @@ void	check_malloc(void *mem)
 	if (mem == NULL)
 	{
 		ft_printf("ERROR: Failed to allocate memory\n");
-		kill_and_quit();
+		free_and_exit();
 	}
 }
 

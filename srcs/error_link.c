@@ -17,7 +17,7 @@ void	check_links(int stage)
 	if (stage == 0)
 	{
 		ft_printf("ERROR: No valid links\n");
-		kill_and_quit();
+		free_and_exit();
 	}
 }
 
@@ -55,6 +55,6 @@ void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line)
 		|| check_duplicate_link(r1, r2) == FAIL)
 	{
 		ft_arrdel(&split);
-		kill_and_quit();
+		free_and_exit();
 	}
 }

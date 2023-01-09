@@ -203,7 +203,7 @@ void	free_everything(void);
 
 t_link	*add_elist(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
-void	kill_and_quit(void);
+void	free_and_exit(void);
 void	set_tracker(t_tracker *tracker, int index, int steps);
 
 /*
@@ -260,3 +260,18 @@ void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num);
 void	ant_movement(void);
 
 #endif
+
+/*
+	Comment in link
+	empty line after ants
+	empty line between rooms and links
+	empty line in links
+	empty line in rooms
+	invalid room in link
+	invalid room name
+	link after end/start
+	missing room cordinate
+	mixed room link
+	link amongs rooms
+	room among links
+*/
