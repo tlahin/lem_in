@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	t_link		start_link;
 	int			path_found;
 
-	if (ac > 1 && av[1])
+	if (ac > 0 && av[0])
 		ft_printf("Let's go!\n");
 	init_globals(&path_found);
 	parse_map();

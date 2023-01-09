@@ -47,10 +47,13 @@ void	assign_room(char *line, int room_type)
 	room->name = ft_strdup(split[0]);
 	room->x = ft_atoi(split[1]);
 	room->y = ft_atoi(split[2]);
+	room->ant = 0;
+	room->prev = NULL;
+	room->next = NULL;
+	room->link = NULL;
 	hash_result = hash_room(room);
 	check_valid_room(split, room, line, hash_result);
 	ft_arrdel(&split);
-	ft_printf("%s\n", line);
 }
 
 void	assign_link(char *line)

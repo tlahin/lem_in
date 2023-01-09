@@ -63,8 +63,8 @@ static void	first_step(t_ant_distr *distr,
 
 void	move_the_bois(void)
 {
-	int			path_index;
-	int			room_index;
+	int			path_idx;
+	int			room_idx;
 	int			cur_ant;
 	t_room		**room;
 	t_ant_distr	distr;
@@ -73,17 +73,17 @@ void	move_the_bois(void)
 	init_ant_movement(&distr);
 	while (g_table->end->ant < g_table->ants)
 	{
-		path_index = 0;
+		path_idx = 0;
 		distr.line[0] = 0;
-		while (path_index < g_optimal_path_count)
+		while (path_idx < g_optimal_path_count)
 		{
-			room = g_optimal_paths[path_index]->rooms;
-			room_index = g_optimal_paths[path_index]->total_steps - 1;
-			while (--room_index >= 0)
-				move_to_next(&distr, room[room_index], room[room_index + 1]);
-			if (cur_ant <= g_table->ants && g_optimal_paths[path_index]->ant_count > 0)
-				first_step(&distr, room[0], g_optimal_paths[path_index], &cur_ant);
-			path_index++;
+			room = g_optimal_paths[path_idx]->rooms;
+			room_idx = g_optimal_paths[path_idx]->total_steps - 1;
+			while (--room_idx >= 0)
+				move_to_next(&distr, room[room_idx], room[room_idx + 1]);
+			if (cur_ant <= g_table->ants && g_optimal_paths[path_idx]->ant_count > 0)
+				first_step(&distr, room[0], g_optimal_paths[path_idx], &cur_ant);
+			path_idx++;
 		}
 		ft_putendl(distr.line);
 	}

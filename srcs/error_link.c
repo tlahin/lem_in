@@ -33,17 +33,17 @@ static int	check_empty_room(t_room *r1, t_room *r2)
 
 static int	check_duplicate_link(t_room *a, t_room *b)
 {
-	t_link	*temp;
+	t_link	*tmp;
 
-	temp = a->link;
-	while (temp)
+	tmp = a->link;
+	while (tmp)
 	{
-		if (ft_strcmp(temp->to->name, b->name) == 0)
+		if (ft_strcmp(tmp->to->name, b->name) == 0)
 		{
 			ft_printf("ERROR: Duplicate links\n");
 			return (FAIL);
 		}
-		temp = temp->next;
+		tmp = tmp->next;
 	}
 	return (OK);
 }

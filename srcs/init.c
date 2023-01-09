@@ -31,12 +31,13 @@ void	init_globals(int *path_found)
 {
 	g_crossed = 1;
 	g_table->ants = 0;
+	g_table->start = NULL;
+	g_table->end = NULL;
 	g_optimal_path_count = 0;
 	g_optimal_line_count = 0;
 	*path_found = 0;
 	g_map = (char *)ft_memalloc(sizeof(char) * STRING_SIZE);
 	check_malloc((void *)g_map);
-
 }
 
 void	init_ant_movement(t_ant_distr *distr)

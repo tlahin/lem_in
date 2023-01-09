@@ -29,31 +29,32 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 	return (FOUND);
 }
 
-static int	conclude_path(t_link **que, t_tracker *tracker, int q_index)
+static int	conclude_path(t_link **que, t_tracker *tracker, int q_idx)
 {
-	int		r_index;
+	int		r_idx;
 	int		target_index;
-	int		backward_edge_used;
+	int		backward_link_used;
 	t_link	r_que[MAGIC_NUMBER];
 	t_room	*old_long_room;
 
-	init_path(&r_index, &backward_edge_used, &old_long_room);
-	set_link(&r_que[r_index++], que[q_index]->to, que[q_index]->from, que[q_index]->flow);
-	target_index = tracker[q_index].index;
-	while (q_index > 0)
+	init_path(&r_idx, &backward_link_used, &old_long_room);
+	set_link(&r_que[r_idx++], que[q_idx]->to, que[q_idx]->from, que[q_idx]->flow);
+	target_index = tracker[q_idx].index;
+	while (q_idx > 0)
 	{
-		if (q_index == target_index)
+		if (q_idx == target_index)
 		{
-			if (que[q_index]->to->prev == que[q_index]->from
-				&& fewer_step_path(que[q_index], tracker[q_index].steps, &old_long_room) == NOT_FOUND)
+			if (que[q_idx]->to->prev == que[q_idx]->from
+				&& fewer_step_path
+				(que[q_idx], tracker[q_idx].steps, &old_long_room) == NOT_FOUND)
 				return (NOT_FOUND);
-			set_link(&r_que[r_index], que[q_index]->to, que[q_index]->from, que[q_index]->flow);
-			check_backward_usage(&backward_edge_used, r_que[r_index++].flow);
-			target_index = tracker[q_index].index;
+			set_link(&r_que[r_idx], que[q_idx]->to, que[q_idx]->from, que[q_idx]->flow);
+			check_backward_usage(&backward_link_used, r_que[r_idx++].flow);
+			target_index = tracker[q_idx].index;
 		}
-		q_index--;
+		q_idx--;
 	}
-	return (augment(r_que, r_index, old_long_room, backward_edge_used));
+	return (augment(r_que, r_idx, old_long_room, backward_link_used));
 }
 
 int bfs(t_link *start)

@@ -37,7 +37,7 @@ void	check_special_path(int path)
 {
 	if (path == NOT_FOUND)
 	{
-		ft_printf("ERROR: not path available\n");
+		ft_printf("ERROR: No path available\n");
 		teminate_program();
 	}
 }
