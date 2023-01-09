@@ -53,7 +53,7 @@ static int	check_duplicate_room(int hash_result, t_room *room)
 {
 	if (hash_result == 0)
 	{
-		ft_printf("ERROR: Duplicate rooms found\n");
+		ft_printf("ERROR: Duplicate rooms\n");
 		free_room_content(room);
 		return (FAIL);
 	}
@@ -67,6 +67,6 @@ void	check_valid_room(char **split, t_room *room, char *line, int hsh_result)
 		|| check_duplicate_room(hsh_result, room) == FAIL)
 	{
 		ft_arrdel(&split);
-		teminate_program();
+		kill_and_quit();
 	}
 }

@@ -14,7 +14,7 @@
 
 static void	do_start_end(t_room *room, int room_type)
 {
-	check_duplicates_special(room, room_type);
+	check_duplicate_special(room, room_type);
 	if (room_type == START_ROOM)
 		g_table->start = room;
 	else if (room_type == END_ROOM)

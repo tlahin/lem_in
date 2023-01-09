@@ -21,12 +21,12 @@ char		*g_map;
 
 int	main(int ac, char **av)
 {
-	t_link		start_link;
-	int			path_found;
+	t_link	start_link;
+	int		path_found;
+	t_flags	flags;
 
-	if (ac > 0 && av[0])
-		ft_printf("Let's go!\n");
-	init_globals(&path_found);
+	init_globals(&path_found, &flags);
+	options(ac, av, &flags);
 	parse_map();
 	set_link(&start_link, g_table->start, g_table->start, 0);
 	while (bfs(&start_link))
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	}
 	g_table->start->ant = g_table->ants;
 	check_special_path(path_found);
-	move_the_bois();
+	now_handle_it(&flags);
 	free_everything();
 	return (0);
 }

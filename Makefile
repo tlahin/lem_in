@@ -13,7 +13,7 @@
 NAME = lem-in
 
 SRCS_DIR = srcs/
-SRCS = main parse_map parse_map_utils init assign error hash free utilities \
+SRCS = main parse_map parse_map_utils init assign hash free utilities error \
 	error_room error_link error_special bfs search augment augment_utilities \
 	pathfinder sort options move
 

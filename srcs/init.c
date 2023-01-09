@@ -27,7 +27,7 @@ void	init_path(int *r_index, int *backward_link_used, t_room **old)
 	*old = NULL;
 }
 
-void	init_globals(int *path_found)
+void	init_globals(int *path_found, t_flags *flags)
 {
 	g_crossed = 1;
 	g_table->ants = 0;
@@ -38,6 +38,9 @@ void	init_globals(int *path_found)
 	*path_found = 0;
 	g_map = (char *)ft_memalloc(sizeof(char) * STRING_SIZE);
 	check_malloc((void *)g_map);
+	flags->no_distr = 0;
+	flags->line = 0;
+	flags->no_map = 0;
 }
 
 void	init_ant_movement(t_ant_distr *distr)
@@ -46,3 +49,5 @@ void	init_ant_movement(t_ant_distr *distr)
 	distr->line = (char *)ft_memalloc(sizeof(char) * distr->str_size);
 	check_malloc(distr->line);
 }
+
+

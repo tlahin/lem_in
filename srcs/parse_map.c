@@ -57,6 +57,7 @@ int	parse_map()
 		line.end++;
 		line.start = line.end;
 	}
+	check_empty_file();
 	check_missing_special();
 	check_links(stage);
 	return (OK);

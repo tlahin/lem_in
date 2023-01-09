@@ -61,7 +61,7 @@ static void	first_step(t_ant_distr *distr,
 	insert_ant(distr, room->name, room->ant);
 }
 
-void	move_the_bois(void)
+void	ant_movement(void)
 {
 	int			path_idx;
 	int			room_idx;

@@ -73,4 +73,7 @@ static void	free_all_rooms(void)
 void	free_everything(void)
 {
 	free_all_rooms();
+	if(g_map)
+		ft_memdel((void **)&g_map);
+	free_path(g_optimal_paths, g_optimal_path_count);
 }

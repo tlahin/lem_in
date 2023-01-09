@@ -38,7 +38,7 @@ void	set_tracker(t_tracker *tracker, int index, int steps)
 	tracker->steps = steps;
 }
 
-void	teminate_program(void)
+void	kill_and_quit(void)
 {
 	free_everything();
 	exit(0);

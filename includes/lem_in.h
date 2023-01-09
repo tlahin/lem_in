@@ -43,6 +43,7 @@ typedef struct s_que		t_que;
 typedef struct s_tracker	t_tracker;
 typedef struct s_path		t_path;
 typedef struct s_ant_distr	t_ant_distr;
+typedef struct s_flags		t_flags;
 
 struct s_room
 {
@@ -79,6 +80,13 @@ struct s_line
 	int	start;
 	int	end;
 	int	index;
+};
+
+struct s_flags
+{
+	int	line;
+	int	no_map;
+	int	no_distr;
 };
 
 struct	s_que
@@ -126,7 +134,7 @@ int		main(int ac, char **av);
 ** Init
 */
 
-void	init_globals(int *path_found);
+void	init_globals(int *path_found, t_flags *flags);
 void	init_que(t_que *q, t_link *start);
 void	init_path(int *r_index, int *backward_link_used, t_room **old);
 void	init_ant_movement(t_ant_distr *distr);
@@ -165,7 +173,7 @@ void	validate_ants(char c);
 void	check_ant_amount(void);
 void	check_malloc(void *mem);
 int		check_valid_line(char *line);
-void	check_duplicates_special(t_room *room, int room_state);
+void	check_empty_file(void);
 
 //rooms
 void	check_valid_room(char **split, t_room *room, char *line, int hsh_result);
@@ -195,8 +203,15 @@ void	free_everything(void);
 
 t_link	*add_elist(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
-void	teminate_program(void);
+void	kill_and_quit(void);
 void	set_tracker(t_tracker *tracker, int index, int steps);
+
+/*
+** Options
+*/
+
+void	options(int ac, char **av, t_flags *flags);
+void	now_handle_it(t_flags *flags);
 
 /*
 ** Bfs
@@ -242,6 +257,6 @@ void	sort_paths(t_path **path, int low, int high);
 */
 
 void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num);
-void	move_the_bois(void);
+void	ant_movement(void);
 
 #endif
