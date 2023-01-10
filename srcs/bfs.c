@@ -57,6 +57,10 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 	return (augment(r_que, r_i, old_long_room, backward_link_used));
 }
 
+/*
+**
+*/
+
 int	bfs(t_link *start)
 {
 	t_que		q;

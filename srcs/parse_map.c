@@ -12,6 +12,11 @@
 
 #include "../includes/lem_in.h"
 
+/*
+** Sort commands from the rest of the data (ants, rooms, links)
+** and feed the parsed lines to corresponding functions
+*/
+
 static void	process_line(char *line, int *stage)
 {
 	static int	room_type;
@@ -35,6 +40,11 @@ static void	process_line(char *line, int *stage)
 	else
 		read_command(line, &room_type);
 }
+
+/*
+** Save the entire map into a global variable g_map
+** Parse one (1) line (ending with '\n') and process it
+*/
 
 int	parse_map(void)
 {

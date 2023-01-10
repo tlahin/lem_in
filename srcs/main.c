@@ -12,12 +12,12 @@
 
 #include "../includes/lem_in.h"
 
-t_table		g_table[HASH_SIZE];
-int			g_crossed;
-int			g_optimal_path_count;
-int			g_optimal_line_count;
-t_path		*g_paths[MAGIC_NUMBER];
-char		*g_map;
+t_table	g_table[HASH_SIZE];
+int		g_crossed;
+int		g_optimal_path_count;
+int		g_optimal_line_count;
+t_path	*g_paths[MAGIC_NUMBER];
+char	*g_map;
 
 int	main(int ac, char **av)
 {

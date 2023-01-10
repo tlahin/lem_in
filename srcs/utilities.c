@@ -12,7 +12,12 @@
 
 #include "../includes/lem_in.h"
 
-t_link	*add_links(t_room *from_room, t_room *to_room)
+/*
+** Creates a new 'link' element to the list of links
+** Saves the link to the 'from' room
+*/
+
+t_link	*add_link(t_room *from_room, t_room *to_room)
 {
 	t_link	*link;
 

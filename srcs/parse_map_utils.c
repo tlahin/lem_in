@@ -12,6 +12,11 @@
 
 #include "../includes/lem_in.h"
 
+/*
+** Parses line for start and end commands
+** to know next room is a 'special' room
+*/
+
 void	read_command(char *line, int *room_type)
 {
 	check_duplicate_command(*room_type);

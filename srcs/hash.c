@@ -63,6 +63,11 @@ int	hash_room(t_room *room)
 	return (new_hash_slot(last_slot->next, room));
 }
 
+/*
+** Retrives a room by converting input (rooms 'name')
+** to a hash value and compares it to find a match in the table
+*/
+
 t_room	*get_room(char *key)
 {
 	t_table	*tmp;

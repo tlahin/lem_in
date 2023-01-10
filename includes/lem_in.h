@@ -209,7 +209,7 @@ void	free_everything(void);
 ** Utilities
 */
 
-t_link	*add_links(t_room *from_room, t_room *to_room);
+t_link	*add_link(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
 void	free_and_exit(void);
 void	set_tracker(t_tracker *tracker, int index, int steps);
