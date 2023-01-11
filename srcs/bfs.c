@@ -58,18 +58,22 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 }
 
 /*
-**
+** Using a 'breadth first search' algorythm search through the map
+** for a path to the end room
+** Create a que to arrange a search on the rooms in a 'correct' order
+** and to keep track whats been visited and what not
+** IF the 'end' room is found
 */
 
 int	bfs(t_link *start)
 {
 	t_que		q;
-	int			path;
+	int			result;
 	t_tracker	tracker[MAGIC_NUMBER];
 
 	init_que(&q, start);
 	tracker[0].steps = 0;
-	path = 0;
+	result = 0;
 	while (q.remaining--)
 	{
 		if (q.que[q.index]->crossed != g_crossed)
@@ -78,8 +82,8 @@ int	bfs(t_link *start)
 				q.remaining += search(q.que, &q.count, q.index, tracker);
 			else
 			{
-				path = conclude_path(q.que, tracker, q.index);
-				if (path != NOT_FOUND)
+				result = conclude_path(q.que, tracker, q.index);
+				if (result != NOT_FOUND)
 					break ;
 			}
 			q.que[q.index]->crossed = g_crossed;
@@ -87,5 +91,5 @@ int	bfs(t_link *start)
 		q.index++;
 	}
 	g_crossed++;
-	return (path);
+	return (result);
 }

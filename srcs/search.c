@@ -15,26 +15,34 @@
 //not occupied - UNUSED flow next
 static int	not_occupied(t_room *prev_room, int next_flow)
 {
+	ft_printf("not_occupied\n");
 	return (prev_room == NULL && next_flow == UNUSED);
 }
 
 // occupied - BACKWARD flow
 static int	occ_backward(int current_flow)
 {
+	ft_printf("occ_back\n");
 	return (current_flow == BACKWARD);
 }
 
 // occupiedd - UNUSED flow - BACKWARD flow next
 static int	occ_unused_to_backward(int current_flow, int next_flow)
 {
+	ft_printf("occ_unused_to_back\n");
 	return (current_flow == UNUSED && next_flow == BACKWARD);
 }
 
 // occupied - USED_FORWARD flow - USED_FORWARD flow next - less steps taken
 static int	shorter_path(int next_flow, int old_steps, int current_steps)
 {
+	ft_printf("short\n");
 	return (next_flow == USED_FORWARD && old_steps > current_steps);
 }
+
+/*
+** Determine 'flow' direction
+*/
 
 int	search(t_link **que, int *q_count, int idx, t_tracker *tracker)
 {
