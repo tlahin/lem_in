@@ -12,36 +12,45 @@
 
 #include "../includes/lem_in.h"
 
-//not occupied - UNUSED flow next
+/*
+** Not occupied - No flow
+*/
+
 static int	not_occupied(t_room *prev_room, int next_flow)
 {
-	ft_printf("not_occupied\n");
 	return (prev_room == NULL && next_flow == UNUSED);
 }
 
-// occupied - BACKWARD flow
+/*
+** Occupied - BACKWARD flow
+*/
+
 static int	occ_backward(int current_flow)
 {
-	ft_printf("occ_back\n");
 	return (current_flow == BACKWARD);
 }
 
-// occupiedd - UNUSED flow - BACKWARD flow next
+/*
+** Occupiedd - UNUSED flow - BACKWARD flow next
+*/
+
 static int	occ_unused_to_backward(int current_flow, int next_flow)
 {
-	ft_printf("occ_unused_to_back\n");
 	return (current_flow == UNUSED && next_flow == BACKWARD);
 }
 
-// occupied - USED_FORWARD flow - USED_FORWARD flow next - less steps taken
+/*
+** Occupied - USED_FORWARD flow - USED_FORWARD flow next - less steps taken
+*/
+
 static int	shorter_path(int next_flow, int old_steps, int current_steps)
 {
-	ft_printf("short\n");
 	return (next_flow == USED_FORWARD && old_steps > current_steps);
 }
 
 /*
-** Determine 'flow' direction
+** Looks through the links and keeps track of steps taken
+** to determine shortest path
 ** returning the amount of rooms to be added to the que
 */
 
@@ -54,8 +63,6 @@ int	search(t_link **que, int *q_count, int idx, t_tracker *tracker)
 	forward_link = que[idx]->to->link;
 	while (forward_link)
 	{
-		ft_printf("LINK: %s - %s\n", que[idx]->from->name, que[idx]->to->name);
-		//ft_printf("%s != %s\n", forward_link->to->name, que[idx]->from->name);
 		if (forward_link->to != que[idx]->from)
 		{
 			if (forward_link->to == que[idx]->to->prev)
