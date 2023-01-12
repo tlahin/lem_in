@@ -2,3 +2,5 @@ a.out
 *.a
 *.o
 lem-in
+tests/*
+test_results
