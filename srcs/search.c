@@ -42,6 +42,7 @@ static int	shorter_path(int next_flow, int old_steps, int current_steps)
 
 /*
 ** Determine 'flow' direction
+** returning the amount of rooms to be added to the que
 */
 
 int	search(t_link **que, int *q_count, int idx, t_tracker *tracker)
@@ -53,6 +54,8 @@ int	search(t_link **que, int *q_count, int idx, t_tracker *tracker)
 	forward_link = que[idx]->to->link;
 	while (forward_link)
 	{
+		ft_printf("LINK: %s - %s\n", que[idx]->from->name, que[idx]->to->name);
+		//ft_printf("%s != %s\n", forward_link->to->name, que[idx]->from->name);
 		if (forward_link->to != que[idx]->from)
 		{
 			if (forward_link->to == que[idx]->to->prev)

@@ -60,9 +60,9 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 /*
 ** Using a 'breadth first search' algorythm search through the map
 ** for a path to the end room
-** Create a que to arrange a search on the rooms in a 'correct' order
+** Create a que to arrange a search on the rooms
 ** and to keep track whats been visited and what not
-** IF the 'end' room is found
+** IF the 'end' room is found, see if you can find a more efficient route
 */
 
 int	bfs(t_link *start)
