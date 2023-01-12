@@ -1,4 +1,4 @@
-RESULT_FILE=./error_result
+RESULT_FILE=./error_results
 LEM_IN_BINARY=../lem-in
 
 if test -f "$RESULT_FILE";
