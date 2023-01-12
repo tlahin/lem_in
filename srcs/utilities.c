@@ -14,7 +14,7 @@
 
 /*
 ** Creates a new 'link' element to the list of links
-** Saves the link to the 'from' room
+** in a room
 */
 
 t_link	*add_link(t_room *from_room, t_room *to_room)
