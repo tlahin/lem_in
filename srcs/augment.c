@@ -60,10 +60,10 @@ static void	pure_forward_augment(t_link *rev_link, int r_i)
 	}
 }
 
-int	augment(t_link *rev_link, int r_i, t_room *long_room, int backward)
+int	augment(t_link *rev_link, int r_i, t_room *old_room, int backward)
 {
-	if (long_room != 0)
-		remove_old_longer_path(long_room);
+	if (old_room != 0)
+		remove_old_longer_path(old_room);
 	if (backward == BACKWARD)
 	{
 		mixed_augment(rev_link, r_i - 1);

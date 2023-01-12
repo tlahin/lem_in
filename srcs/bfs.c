@@ -29,6 +29,10 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 	return (FOUND);
 }
 
+/*
+**
+*/
+
 static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 {
 	int		r_i;
@@ -61,8 +65,7 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 ** Using a 'breadth first search' look through the map
 ** for a path to the end room
 ** Create a que to arrange a search on the rooms
-** and to keep track whats been visited and what not
-** IF the 'end' room is found, see if another path is found
+** and to keep track whats been visited
 */
 
 int	bfs(t_link *start)

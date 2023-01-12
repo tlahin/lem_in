@@ -237,7 +237,7 @@ int		search(t_link **que, int *q_count, int idx, t_tracker *tracker);
 ** Augment
 */
 
-int		augment(t_link *rev_link, int r_index, t_room *long_room, int backward);
+int		augment(t_link *rev_link, int r_i, t_room *old_room, int backward);
 
 /*
 ** Augment utilities
