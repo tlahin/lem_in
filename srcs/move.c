@@ -12,6 +12,11 @@
 
 #include "../includes/lem_in.h"
 
+/*
+** Creates the string with the ants and rooms which will be prited
+** at the end of every 'turn'
+*/
+
 void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num)
 {
 	int		i;
@@ -60,6 +65,12 @@ static void	first_step(t_ant_distr *distr,
 	cur_path->ant_count--;
 	insert_ant(distr, room->name, room->ant);
 }
+
+/*
+** Loops untill each ant has reached the 'end' room
+** moves ants if possible printing a string each 'turn'
+** string contains which ant has moved and where it moved
+*/
 
 void	ant_movement(void)
 {

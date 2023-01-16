@@ -36,19 +36,3 @@ void	double_str_size(void **mem, int size)
 	free(*mem);
 	*mem = insurance_str;
 }
-
-void	insurance_reading(int *ret)
-{
-	int	total;
-
-	if (*ret < STRING_SIZE)
-		return ;
-	total = *ret;
-	while (*ret > 0)
-	{
-		double_str_size((void **)&g_map, total);
-		*ret = read(0, &g_map[total], total);
-		total += *ret;
-	}
-	*ret = total;
-}

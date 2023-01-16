@@ -30,6 +30,7 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 }
 
 /*
+** After bfs finds a connection to the end room
 **
 */
 
@@ -39,9 +40,9 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 	int		target_index;
 	int		backward_link_used;
 	t_link	r_que[MAGIC_NUMBER];
-	t_room	*old_long_room;
+	t_room	*old_room;
 
-	init_path(&r_i, &backward_link_used, &old_long_room);
+	init_path(&r_i, &backward_link_used, &old_room);
 	set_link(&r_que[r_i++], que[q_i]->to, que[q_i]->from, que[q_i]->flow);
 	target_index = tracker[q_i].index;
 	while (q_i > 0)
@@ -50,22 +51,22 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 		{
 			if (que[q_i]->to->prev == que[q_i]->from
 				&& fewer_step_path
-				(que[q_i], tracker[q_i].steps, &old_long_room) == NOT_FOUND)
-				return (NOT_FOUND);
+				(que[q_i], tracker[q_i].steps, &old_room) == NOT_FOUND)
+					return (NOT_FOUND);
 			set_link(&r_que[r_i], que[q_i]->to, que[q_i]->from, que[q_i]->flow);
 			check_backward_usage(&backward_link_used, r_que[r_i++].flow);
 			target_index = tracker[q_i].index;
 		}
 		q_i--;
 	}
-	return (augment(r_que, r_i, old_long_room, backward_link_used));
+	return (augment(r_que, r_i, old_room, backward_link_used));
 }
 
 /*
-** Using a 'breadth first search' look through the map
-** for a path to the end room
-** Create a que to arrange a search on the rooms
-** and to keep track whats been visited
+** Create a que to arrange a search on the links
+** using a 'breadth first search'
+** Looks through the map
+** for a connection to the 'end' room
 */
 
 int	bfs(t_link *start)

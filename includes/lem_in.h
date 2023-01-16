@@ -146,7 +146,6 @@ void	init_ant_movement(t_ant_distr *distr);
 int		parse_map(void);
 void	read_command(char *line, int *room_type);
 void	double_str_size(void **mem, int size);
-void	insurance_reading(int *ret);
 
 /*
 ** Assign

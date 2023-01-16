@@ -19,6 +19,10 @@ static void	delete_backward_link(t_link *rev_link, int i)
 		delete_prev_room(rev_link[i].from);
 }
 
+/*
+** Corrects the 'flow' direction
+*/
+
 static void	mixed_augment(t_link *rev_link, int r_i)
 {
 	int	i;
@@ -45,6 +49,10 @@ static void	mixed_augment(t_link *rev_link, int r_i)
 	}
 }
 
+/*
+**
+*/
+
 static void	pure_forward_augment(t_link *rev_link, int r_i)
 {
 	int	step_count;
@@ -60,16 +68,20 @@ static void	pure_forward_augment(t_link *rev_link, int r_i)
 	}
 }
 
-int	augment(t_link *rev_link, int r_i, t_room *old_room, int backward)
+/*
+** Augments the path found during last bfs call
+*/
+
+int	augment(t_link *rev_link, int rev_idx, t_room *old_room, int backward)
 {
 	if (old_room != 0)
 		remove_old_longer_path(old_room);
 	if (backward == BACKWARD)
 	{
-		mixed_augment(rev_link, r_i - 1);
+		mixed_augment(rev_link, rev_idx - 1);
 		return (BACKWARD);
 	}
 	else
-		pure_forward_augment(rev_link, r_i - 1);
+		pure_forward_augment(rev_link, rev_idx - 1);
 	return (USED_FORWARD);
 }

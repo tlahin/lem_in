@@ -51,7 +51,7 @@ static int	shorter_path(int next_flow, int old_steps, int current_steps)
 /*
 ** Looks through the links and keeps track of steps taken
 ** to determine shortest path
-** returning the amount of rooms to be added to the que
+** returning the amount of links/rooms to be added to the que
 */
 
 int	search(t_link **que, int *q_count, int idx, t_tracker *tracker)
