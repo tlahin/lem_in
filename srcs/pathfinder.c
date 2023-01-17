@@ -25,6 +25,12 @@ static int	count_steps(t_room *room)
 	return (i);
 }
 
+/*
+** Counts the amout of lines/turns
+** required to transfer all the ants across
+** given the current path(s)
+*/
+
 static int	count_lines(t_path **path, int p_count)
 {
 	int	path_index;
@@ -43,15 +49,18 @@ static int	count_lines(t_path **path, int p_count)
 			step = 0;
 			line++;
 		}
-		while (path_index + 1 < p_count
-			&& line >= path[path_index + 1]->total_steps && step == 0)
-			path_index++;
-			path[step]->ant_count++;
-			step++;
-			max_ants--;
+		while (path_index + 1 < p_count && line >= path[path_index + 1]->total_steps && step == 0)
+		path_index++;
+		path[step]->ant_count++;
+		step++;
+		max_ants--;
 	}
 	return (line);
 }
+
+/*
+** 
+*/
 
 static void	set_optimal_path(t_path **paths, int p_count)
 {
@@ -65,8 +74,10 @@ static void	set_optimal_path(t_path **paths, int p_count)
 		g_paths[path_index] = paths[path_index];
 		room_index = 0;
 		room = g_paths[path_index]->rooms[room_index];
+		ft_printf("	   total_steps: %d\n", g_paths[path_index]->total_steps);
 		while (room_index < g_paths[path_index]->total_steps)
 		{
+			ft_printf("	   room_name    %s\n", room->name);
 			g_paths[path_index]->rooms[room_index] = room;
 			room_index++;
 			room = room->next;
@@ -103,17 +114,23 @@ static int	set_paths(t_path **path)
 	return (p_count);
 }
 
+/*
+**
+*/
+
 int	pathfinder(void)
 {
 	int		line_count;
 	int		p_count;
 	t_path	*paths[MAGIC_NUMBER];
 
+	ft_printf("  PATHFINDER CALL\n");
 	p_count = set_paths(paths);
 	sort_paths(paths, 0, p_count - 1);
 	line_count = count_lines(paths, p_count);
 	if (line_count < g_optimal_line_count || g_optimal_line_count == 0)
 	{
+		ft_printf("	optimal_p_count %d\n\n", g_optimal_path_count);
 		if (g_optimal_path_count != 0)
 			free_path(g_paths, g_optimal_path_count);
 		set_optimal_path(paths, p_count);
