@@ -33,24 +33,25 @@ static int	count_steps(t_room *room)
 
 static int	count_lines(t_path **path, int p_count)
 {
-	int	path_index;
+	int	p_index;
 	int	line;
 	int	step;
 	int	max_ants;
 
-	path_index = 0;
+	p_index = 0;
 	step = 0;
 	line = path[0]->total_steps;
 	max_ants = g_table->ants;
 	while (max_ants > 0)
 	{
-		if (step > path_index)
+		if (step > p_index)
 		{
 			step = 0;
 			line++;
 		}
-		while (path_index + 1 < p_count && line >= path[path_index + 1]->total_steps && step == 0)
-		path_index++;
+		while (p_index + 1 < p_count
+			&& line >= path[p_index + 1]->total_steps && step == 0)
+		p_index++;
 		path[step]->ant_count++;
 		step++;
 		max_ants--;
@@ -64,23 +65,23 @@ static int	count_lines(t_path **path, int p_count)
 
 static void	set_optimal_path(t_path **paths, int p_count)
 {
-	int		path_index;
+	int		p_index;
 	int		room_index;
 	t_room	*room;
 
-	path_index = 0;
-	while (path_index < p_count)
+	p_index = 0;
+	while (p_index < p_count)
 	{
-		g_paths[path_index] = paths[path_index];
+		g_paths[p_index] = paths[p_index];
 		room_index = 0;
-		room = g_paths[path_index]->rooms[room_index];
-		while (room_index < g_paths[path_index]->total_steps)
+		room = g_paths[p_index]->rooms[room_index];
+		while (room_index < g_paths[p_index]->total_steps)
 		{
-			g_paths[path_index]->rooms[room_index] = room;
+			g_paths[p_index]->rooms[room_index] = room;
 			room_index++;
 			room = room->next;
 		}
-		path_index++;
+		p_index++;
 	}
 }
 
