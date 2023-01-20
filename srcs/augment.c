@@ -20,7 +20,7 @@ static void	delete_backward_link(t_link *rev_link, int i)
 }
 
 /*
-** Corrects the 'flow' direction
+** Corrects the pathing and the 'flow'
 */
 
 static void	mixed_augment(t_link *rev_link, int r_i)
@@ -48,10 +48,6 @@ static void	mixed_augment(t_link *rev_link, int r_i)
 		i--;
 	}
 }
-
-/*
-**
-*/
 
 static void	pure_forward_augment(t_link *rev_link, int r_i)
 {

@@ -31,7 +31,7 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 
 /*
 ** After bfs finds a connection to the end room
-**
+** create a 'backwards path' of it
 */
 
 static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
@@ -75,14 +75,11 @@ int	bfs(t_link *start)
 	int			result;
 	t_tracker	tracker[MAGIC_NUMBER];
 
-	ft_printf("BFS CALL\n");
 	init_que(&q, start);
 	tracker[0].steps = 0;
 	result = 0;
 	while (q.remaining--)
 	{
-		/* ft_printf("INDEX: %d   ", q.index);
-		ft_printf("%s - %s\n", q.que[q.index]->from->name, q.que[q.index]->to->name); */
 		if (q.que[q.index]->crossed != g_crossed)
 		{
 			if (q.que[q.index]->to != g_table->end)
