@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 		path_found = 1;
 	}
 	g_table->start->ant = g_table->ants;
-	check_special_path(path_found);
+	check_path(path_found);
 	now_handle_it(&flags);
 	free_everything();
 	return (0);

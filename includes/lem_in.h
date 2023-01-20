@@ -193,7 +193,7 @@ void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line);
 
 void	check_missing_special(void);
 void	check_duplicate_command(int room_type);
-void	check_special_path(int path_found);
+void	check_path(int path_found);
 void	check_duplicate_special(t_room *room, int room_type);
 
 /*

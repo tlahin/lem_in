@@ -33,7 +33,7 @@ void	check_missing_special(void)
 	}
 }
 
-void	check_special_path(int path)
+void	check_path(int path)
 {
 	if (path == NOT_FOUND)
 	{
