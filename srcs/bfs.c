@@ -31,7 +31,7 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 
 /*
 ** After bfs finds a connection to the end room
-** create a 'backwards path' of it
+** Track the path backwards and check for already existing flows
 */
 
 static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
@@ -67,6 +67,7 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 ** using a 'breadth first search'
 ** Looks through the map
 ** for a connection to the 'end' room
+** Will find the shortest connection, IF one exists
 */
 
 int	bfs(t_link *start)
@@ -83,7 +84,9 @@ int	bfs(t_link *start)
 		if (q.que[q.index]->crossed != g_crossed)
 		{
 			if (q.que[q.index]->to != g_table->end)
+			{
 				q.remaining += search(q.que, &q.count, q.index, tracker);
+			}
 			else
 			{
 				result = conclude_path(q.que, tracker, q.index);

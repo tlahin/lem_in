@@ -20,7 +20,8 @@ static void	delete_backward_link(t_link *rev_link, int i)
 }
 
 /*
-** Corrects the pathing and the 'flow'
+** Using mixed augment, removes the old backwards link if one exists
+** and corrects the flow
 */
 
 static void	mixed_augment(t_link *rev_link, int r_i)
@@ -48,6 +49,10 @@ static void	mixed_augment(t_link *rev_link, int r_i)
 		i--;
 	}
 }
+
+/*
+** Straight forward flow
+*/
 
 static void	pure_forward_augment(t_link *rev_link, int r_i)
 {
