@@ -84,9 +84,7 @@ int	bfs(t_link *start)
 		if (q.que[q.index]->crossed != g_crossed)
 		{
 			if (q.que[q.index]->to != g_table->end)
-			{
 				q.remaining += search(q.que, &q.count, q.index, tracker);
-			}
 			else
 			{
 				result = conclude_path(q.que, tracker, q.index);
