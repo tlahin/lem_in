@@ -32,7 +32,9 @@ void	now_handle_it(t_flags *flags)
 		ft_printf("%s\n", g_map);
 	if (flags->line == 1)
 		ft_printf("%d\n", g_optimal_line_count);
-	if (flags->no_distr == 0)
+	if (g_table->start_end_connected == 1)
+		special_move();
+	else if (flags->no_distr == 0)
 		ant_movement();
 }
 

@@ -39,7 +39,7 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 	int		r_i;
 	int		target_index;
 	int		backward_link_used;
-	t_link	r_que[MAGIC_NUMBER];
+	t_link	r_que[SIZE];
 	t_room	*old_room;
 
 	init_path(&r_i, &backward_link_used, &old_room);
@@ -74,7 +74,7 @@ int	bfs(t_link *start)
 {
 	t_que		q;
 	int			result;
-	t_tracker	tracker[MAGIC_NUMBER];
+	t_tracker	tracker[SIZE];
 
 	init_que(&q, start);
 	tracker[0].steps = 0;

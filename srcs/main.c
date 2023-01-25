@@ -16,7 +16,7 @@ t_table	g_table[HASH_SIZE];
 int		g_crossed;
 int		g_optimal_path_count;
 int		g_optimal_line_count;
-t_path	*g_paths[MAGIC_NUMBER];
+t_path	*g_paths[SIZE];
 char	*g_map;
 
 int	main(int ac, char **av)
@@ -29,12 +29,17 @@ int	main(int ac, char **av)
 	options(ac, av, &flags);
 	parse_map();
 	set_link(&start_link, g_table->start, g_table->start, 0);
-	while (bfs(&start_link))
+	while (bfs(&start_link) && g_table->start_end_connected != 1)
 	{
 		pathfinder();
 		path_found = 1;
 	}
 	g_table->start->ant = g_table->ants;
+	if (g_table->start_end_connected == 1)
+	{
+		g_optimal_line_count = 1;
+		path_found = 1;
+	}
 	check_path(path_found);
 	now_handle_it(&flags);
 	free_everything();

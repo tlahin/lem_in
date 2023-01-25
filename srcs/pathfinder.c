@@ -125,8 +125,14 @@ int	pathfinder(void)
 {
 	int		line_count;
 	int		p_count;
-	t_path	*paths[MAGIC_NUMBER];
+	t_path	*paths[SIZE];
 
+	if (g_table->start_end_connected == 1)
+	{
+		g_optimal_line_count = 1;
+		set_special_path(paths);
+		return (1);
+	}
 	p_count = set_paths(paths);
 	sort_paths(paths, 0, p_count - 1);
 	line_count = count_lines(paths, p_count);

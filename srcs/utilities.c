@@ -48,3 +48,17 @@ void	free_and_exit(void)
 	free_everything();
 	exit(0);
 }
+
+void	set_special_path(t_path **path)
+{
+	path[0] = (t_path *)ft_memalloc(sizeof(t_path));
+	check_malloc((void *)path[0]);
+	path[0]->ant_count = g_table->ants;
+	path[0]->total_steps = 1;
+	path[0]->rooms
+		= (t_room **)
+		ft_memalloc(sizeof(t_room *) * path[0]->total_steps);
+	check_malloc((void *)path[0]);
+	path[0]->rooms[0] = g_table->start->link->to;
+	path[1] = NULL;
+}

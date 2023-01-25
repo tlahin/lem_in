@@ -66,6 +66,22 @@ static void	first_step(t_ant_distr *distr,
 	insert_ant(distr, room->name, room->ant);
 }
 
+void	special_move(void)
+{
+	int	cur_ant;
+
+	cur_ant = 1;
+	g_optimal_line_count = 1;
+	while (cur_ant <= g_table->ants)
+	{
+		ft_printf("L%d-end", cur_ant);
+		if (cur_ant <= g_table->ants)
+			write(1, " ", 1);
+		cur_ant++;
+	}
+	ft_printf("\n");
+}
+
 /*
 ** Loops untill each ant has reached the 'end' room
 ** moves ants if possible printing a string each 'turn'
@@ -74,7 +90,7 @@ static void	first_step(t_ant_distr *distr,
 
 void	ant_movement(void)
 {
-	int			path_index;
+	int			p_index;
 	int			room_idx;
 	int			cur_ant;
 	t_room		**room;
@@ -84,17 +100,17 @@ void	ant_movement(void)
 	init_ant_movement(&distr);
 	while (g_table->end->ant < g_table->ants)
 	{
-		path_index = 0;
+		p_index = 0;
 		distr.line[0] = 0;
-		while (path_index < g_optimal_path_count)
+		while (p_index < g_optimal_path_count)
 		{
-			room = g_paths[path_index]->rooms;
-			room_idx = g_paths[path_index]->total_steps - 1;
+			room = g_paths[p_index]->rooms;
+			room_idx = g_paths[p_index]->total_steps - 1;
 			while (--room_idx >= 0)
 				move_to_next(&distr, room[room_idx], room[room_idx + 1]);
-			if (cur_ant <= g_table->ants && g_paths[path_index]->ant_count > 0)
-				first_step(&distr, room[0], g_paths[path_index], &cur_ant);
-			path_index++;
+			if (cur_ant <= g_table->ants && g_paths[p_index]->ant_count > 0)
+				first_step(&distr, room[0], g_paths[p_index], &cur_ant);
+			p_index++;
 		}
 		ft_putendl(distr.line);
 	}

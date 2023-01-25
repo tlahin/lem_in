@@ -41,6 +41,7 @@ void	init_globals(int *path_found, t_flags *flags)
 	flags->no_distr = 0;
 	flags->line = 0;
 	flags->no_map = 0;
+	g_table->start_end_connected = 0;
 }
 
 void	init_ant_movement(t_ant_distr *distr)

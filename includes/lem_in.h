@@ -23,7 +23,7 @@
 # define START_ROOM		-1
 # define END_ROOM		1
 # define HASH_SIZE		12000
-# define MAGIC_NUMBER	30000
+# define SIZE			30000
 # define STRING_SIZE	1000000
 
 # define FOUND			1
@@ -73,6 +73,7 @@ struct s_table
 	t_room	*start;
 	t_room	*end;
 	int		ants;
+	int		start_end_connected;
 };
 
 struct s_line
@@ -95,7 +96,7 @@ struct	s_que
 	int		index;
 	int		path;
 	int		remaining;
-	t_link	*que[MAGIC_NUMBER];
+	t_link	*que[SIZE];
 };
 
 struct s_tracker
@@ -121,7 +122,7 @@ extern t_table				g_table[HASH_SIZE];
 extern int					g_crossed;
 extern int					g_optimal_path_count;
 extern int					g_optimal_line_count;
-extern t_path				*g_paths[MAGIC_NUMBER];
+extern t_path				*g_paths[SIZE];
 extern char					*g_map;
 
 /*
@@ -212,6 +213,7 @@ t_link	*add_link(t_room *from_room, t_room *to_room);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
 void	free_and_exit(void);
 void	set_tracker(t_tracker *tracker, int index, int steps);
+void	set_special_path(t_path **path);
 
 /*
 ** Options
@@ -265,5 +267,6 @@ void	sort_paths(t_path **path, int low, int high);
 
 void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num);
 void	ant_movement(void);
+void	special_move(void);
 
 #endif

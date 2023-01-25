@@ -90,6 +90,8 @@ void	assign_link(char *line)
 	split = ft_strsplit(line, '-');
 	room_1 = get_room(split[0]);
 	room_2 = get_room(split[1]);
+	if (room_1 == g_table->start && room_2 == g_table->end)
+		g_table->start_end_connected = 1;
 	check_valid_link(room_1, room_2, split, line);
 	add_link(room_1, room_2);
 	add_link(room_2, room_1);
