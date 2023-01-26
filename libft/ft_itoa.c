@@ -16,7 +16,7 @@ static char	*to_str(char *str, int i, int len)
 {
 	while (i > 0)
 	{
-		str[len--] = (char) i % 10 + '0';
+		str[len--] = (char) (i % 10 + '0');
 		i = i / 10;
 	}
 	return (str);
