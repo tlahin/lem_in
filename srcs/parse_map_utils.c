@@ -17,21 +17,21 @@
 ** to know next room is a 'special' room
 */
 
-void	read_command(char *line, int *room_type)
+void	read_command(char *line, int *room_type, t_lem_in *lem_in)
 {
-	check_duplicate_command(*room_type);
+	check_duplicate_command(*room_type, lem_in);
 	if (!ft_strcmp(line, "##start"))
 		*room_type = START_ROOM;
 	else if (!ft_strcmp(line, "##end"))
 		*room_type = END_ROOM;
 }
 
-void	double_str_size(void **mem, int size)
+void	double_str_size(void **mem, int size, t_lem_in *lem_in)
 {
 	char	*insurance_str;
 
 	insurance_str = (char *)ft_memalloc(sizeof(char) * (size * 2));
-	check_malloc((void *)insurance_str);
+	check_malloc((void *)insurance_str, lem_in);
 	ft_memcpy(insurance_str, *mem, size);
 	free(*mem);
 	*mem = insurance_str;

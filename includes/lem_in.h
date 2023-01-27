@@ -44,6 +44,7 @@ typedef struct s_tracker	t_tracker;
 typedef struct s_path		t_path;
 typedef struct s_ant_distr	t_ant_distr;
 typedef struct s_flags		t_flags;
+typedef struct s_lem_in		t_lem_in;
 
 struct s_room
 {
@@ -118,12 +119,22 @@ struct s_ant_distr
 	char	*line;
 };
 
-extern t_table				g_table[HASH_SIZE];
+struct s_lem_in
+{
+	t_table	table[HASH_SIZE];
+	int		crossed;
+	int		optimal_path_count;
+	int		optimal_line_count;
+	char	*map;
+	t_path	*paths[SIZE];
+};
+
+/* extern t_table				g_table[HASH_SIZE];
 extern int					g_crossed;
 extern int					g_optimal_path_count;
 extern int					g_optimal_line_count;
 extern t_path				*g_paths[SIZE];
-extern char					*g_map;
+extern char					*g_map; */
 
 /*
 ** Main stuff
@@ -135,67 +146,67 @@ int		main(int ac, char **av);
 ** Init
 */
 
-void	init_globals(int *path_found, t_flags *flags);
+void	init_variables(t_lem_in *lem_in, int *path_found, t_flags *flags);
 void	init_que(t_que *q, t_link *start);
 void	init_path(int *r_index, int *backward_link_used, t_room **old);
-void	init_ant_movement(t_ant_distr *distr);
+void	init_ant_movement(t_ant_distr *distr, t_lem_in *lem_in);
 
 /*
 ** Map processing
 */
 
-int		parse_map(void);
-void	read_command(char *line, int *room_type);
-void	double_str_size(void **mem, int size);
+int		parse_map(t_lem_in *lem_in);
+void	read_command(char *line, int *room_type, t_lem_in *lem_in);
+void	double_str_size(void **mem, int size, t_lem_in *lem_in);
 
 /*
 ** Assign
 */
 
-int		assing_ants(char *line);
-void	assign_room(char *line, int room_type);
-void	assign_link(char *line);
+int		assing_ants(char *line, t_lem_in *lem_in);
+void	assign_room(char *line, int room_type, t_lem_in *lem_in);
+void	assign_link(char *line, t_lem_in *lem_in);
 
 /*
 ** Hash
 */
 
 int		check_existing_slot(t_table **last, char *room_name);
-int		hash_room(t_room *room);
-t_room	*get_room(char *key);
+int		hash_room(t_room *room, t_lem_in *lem_in);
+t_room	*get_room(char *key, t_lem_in *lem_in);
 
 /*
 ** Error
 */
 
-void	validate_ants(char c);
-void	check_ant_amount(void);
-void	check_malloc(void *mem);
-int		check_valid_line(char *line);
-void	check_empty_file(void);
+void	validate_ants(char c, t_lem_in *lem_in);
+void	check_ant_amount(t_lem_in *lem_in);
+void	check_malloc(void *mem, t_lem_in *lem_in);
+int		check_valid_line(char *line, t_lem_in *lem_in);
+void	check_empty_file(t_lem_in *lem_in);
 
 /*
 ** Room errors
 */
 
-void	check_valid_room(char **split, t_room *room, char *line, int hash_ret);
+void	check_valid_room(char **split, t_room *room, char *line, int hash_ret, t_lem_in *lem_in);
 int		check_multiple_char(char *line, char c, int amount);
 
 /*
 ** Link errors
 */
 
-void	check_links(int stage);
-void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line);
+void	check_links(int stage, t_lem_in *lem_in);
+void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line, t_lem_in *lem_in);
 
 /*
 ** Special errors
 */
 
-void	check_missing_special(void);
-void	check_duplicate_command(int room_type);
-void	check_path(int path_found);
-void	check_duplicate_special(t_room *room, int room_type);
+void	check_missing_special(t_lem_in *lem_in);
+void	check_duplicate_command(int room_type, t_lem_in *lem_in);
+void	check_path(int path_found, t_lem_in *lem_in);
+void	check_duplicate_special(t_room *room, int room_typ, t_lem_in *lem_in);
 
 /*
 ** Free
@@ -203,30 +214,30 @@ void	check_duplicate_special(t_room *room, int room_type);
 
 void	free_path(t_path **paths, int p_count);
 void	free_room_content(t_room *room);
-void	free_everything(void);
+void	free_everything(t_lem_in *lem_in);
 
 /*
 ** Utilities
 */
 
-t_link	*add_link(t_room *from_room, t_room *to_room);
+t_link	*add_link(t_room *from_room, t_room *to_room, t_lem_in *lem_in);
 void	set_link(t_link *link, t_room *from, t_room *to, int flow);
-void	free_and_exit(void);
+void	free_and_exit(t_lem_in *lem_in);
 void	set_tracker(t_tracker *tracker, int index, int steps);
-void	set_special_path(t_path **path);
+void	set_special_path(t_path **path, t_lem_in *lem_in);
 
 /*
 ** Options
 */
 
-void	options(int ac, char **av, t_flags *flags);
-void	now_handle_it(t_flags *flags);
+void	options(int ac, char **av, t_flags *flags, t_lem_in *lem_in);
+void	now_handle_it(t_flags *flags, t_lem_in *lem_in);
 
 /*
 ** Bfs
 */
 
-int		bfs(t_link *start);
+int		bfs(t_link *start, t_lem_in *lem_in);
 
 /*
 ** Search
@@ -238,7 +249,7 @@ int		search(t_link **que, int *q_count, int idx, t_tracker *tracker);
 ** Augment
 */
 
-int		augment(t_link *rev_link, int r_i, t_room *old_room, int backward);
+int		augment(t_link *rev_link, int r_i, t_room *old_room, int backward, t_lem_in *lem_in);
 
 /*
 ** Augment utilities
@@ -247,13 +258,13 @@ int		augment(t_link *rev_link, int r_i, t_room *old_room, int backward);
 void	set_flow(t_link *list, t_room *target_room, int flow);
 void	delete_forward_room(t_room *room);
 void	delete_prev_room(t_room *room);
-void	remove_old_longer_path(t_room *room);
+void	remove_old_longer_path(t_room *room, t_lem_in *lem_in);
 
 /*
 ** Algo
 */
 
-int		pathfinder(void);
+int		pathfinder(t_lem_in *lem_in);
 
 /*
 ** Sort
@@ -265,8 +276,8 @@ void	sort_paths(t_path **path, int low, int high);
 ** Mover
 */
 
-void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num);
-void	ant_movement(void);
-void	special_move(void);
+void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num, t_lem_in *lem_in);
+void	ant_movement(t_lem_in *lem_in);
+void	special_move(t_lem_in *lem_in);
 
 #endif

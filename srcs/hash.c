@@ -47,19 +47,19 @@ int	check_existing_slot(t_table **last, char *room_name)
 	return (1);
 }
 
-int	hash_room(t_room *room)
+int	hash_room(t_room *room, t_lem_in *lem_in)
 {
 	unsigned int	index;
 	t_table			*last_slot;
 
 	index = hash_value(room->name);
-	if (g_table[index].room == NULL)
-		return (new_hash_slot(&g_table[index], room));
-	last_slot = &g_table[index];
+	if (lem_in->table[index].room == NULL)
+		return (new_hash_slot(&lem_in->table[index], room));
+	last_slot = &lem_in->table[index];
 	if (check_existing_slot(&last_slot, room->name) == 0)
 		return (0);
 	last_slot->next = (t_table *)ft_memalloc(sizeof(t_table));
-	check_malloc((void *)last_slot->next);
+	check_malloc((void *)last_slot->next, lem_in);
 	return (new_hash_slot(last_slot->next, room));
 }
 
@@ -68,13 +68,13 @@ int	hash_room(t_room *room)
 ** to a hash value and compares it to find a match in the table
 */
 
-t_room	*get_room(char *key)
+t_room	*get_room(char *key, t_lem_in *lem_in)
 {
 	t_table	*tmp;
 
 	if (key)
 	{
-		tmp = &g_table[hash_value(key)];
+		tmp = &lem_in->table[hash_value(key)];
 		while (tmp->room && ft_strcmp(tmp->room->name, key) != 0)
 			tmp = tmp->next;
 		if (tmp)

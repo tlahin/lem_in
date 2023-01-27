@@ -17,12 +17,12 @@
 ** in a room
 */
 
-t_link	*add_link(t_room *from_room, t_room *to_room)
+t_link	*add_link(t_room *from_room, t_room *to_room, t_lem_in *lem_in)
 {
 	t_link	*link;
 
 	link = (t_link *)ft_memalloc(sizeof(t_link));
-	check_malloc((void *)link);
+	check_malloc((void *)link, lem_in);
 	set_link(link, from_room, to_room, 0);
 	link->next = from_room->link;
 	from_room->link = link;
@@ -43,22 +43,22 @@ void	set_tracker(t_tracker *tracker, int index, int steps)
 	tracker->steps = steps;
 }
 
-void	free_and_exit(void)
+void	free_and_exit(t_lem_in *lem_in)
 {
-	free_everything();
+	free_everything(lem_in);
 	exit(0);
 }
 
-void	set_special_path(t_path **path)
+void	set_special_path(t_path **path, t_lem_in *lem_in)
 {
 	path[0] = (t_path *)ft_memalloc(sizeof(t_path));
-	check_malloc((void *)path[0]);
-	path[0]->ant_count = g_table->ants;
+	check_malloc((void *)path[0], lem_in);
+	path[0]->ant_count = lem_in->table->ants;
 	path[0]->total_steps = 1;
 	path[0]->rooms
 		= (t_room **)
 		ft_memalloc(sizeof(t_room *) * path[0]->total_steps);
-	check_malloc((void *)path[0]);
-	path[0]->rooms[0] = g_table->start->link->to;
+	check_malloc((void *)path[0], lem_in);
+	path[0]->rooms[0] = lem_in->table->start->link->to;
 	path[1] = NULL;
 }

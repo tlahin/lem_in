@@ -12,12 +12,12 @@
 
 #include "../includes/lem_in.h"
 
-static int	count_steps(t_room *room)
+static int	count_steps(t_room *room, t_lem_in *lem_in)
 {
 	int	i;
 
 	i = 1;
-	while (room != g_table->end)
+	while (room != lem_in->table->end)
 	{
 		room->steps = i++;
 		room = room->next;
@@ -31,7 +31,7 @@ static int	count_steps(t_room *room)
 ** given the current path(s)
 */
 
-static int	count_lines(t_path **path, int p_count)
+static int	count_lines(t_path **path, int p_count, t_lem_in *lem_in)
 {
 	int	p_index;
 	int	line;
@@ -41,7 +41,7 @@ static int	count_lines(t_path **path, int p_count)
 	p_index = 0;
 	step = 0;
 	line = path[0]->total_steps;
-	max_ants = g_table->ants;
+	max_ants = lem_in->table->ants;
 	while (max_ants > 0)
 	{
 		if (step > p_index)
@@ -63,7 +63,7 @@ static int	count_lines(t_path **path, int p_count)
 ** Saves the 'best' paths into a global variable
 */
 
-static void	set_optimal_path(t_path **paths, int p_count)
+static void	set_optimal_path(t_path **paths, int p_count, t_lem_in *lem_in)
 {
 	int		p_index;
 	int		room_index;
@@ -72,12 +72,12 @@ static void	set_optimal_path(t_path **paths, int p_count)
 	p_index = 0;
 	while (p_index < p_count)
 	{
-		g_paths[p_index] = paths[p_index];
+		lem_in->paths[p_index] = paths[p_index];
 		room_index = 0;
-		room = g_paths[p_index]->rooms[room_index];
-		while (room_index < g_paths[p_index]->total_steps)
+		room = lem_in->paths[p_index]->rooms[room_index];
+		while (room_index < lem_in->paths[p_index]->total_steps)
 		{
-			g_paths[p_index]->rooms[room_index] = room;
+			lem_in->paths[p_index]->rooms[room_index] = room;
 			room_index++;
 			room = room->next;
 		}
@@ -89,25 +89,25 @@ static void	set_optimal_path(t_path **paths, int p_count)
 ** Returns the amount of paths being used
 */
 
-static int	set_paths(t_path **path)
+static int	set_paths(t_path **path, t_lem_in *lem_in)
 {
 	int		p_count;
 	t_link	*tmp;
 
 	p_count = 0;
-	tmp = g_table->start->link;
+	tmp = lem_in->table->start->link;
 	while (tmp)
 	{
 		if (tmp->flow == 1)
 		{
 			path[p_count] = (t_path *)ft_memalloc(sizeof(t_path));
-			check_malloc((void *)path[p_count]);
+			check_malloc((void *)path[p_count], lem_in);
 			path[p_count]->ant_count = 0;
-			path[p_count]->total_steps = count_steps(tmp->to);
+			path[p_count]->total_steps = count_steps(tmp->to, lem_in);
 			path[p_count]->rooms
 				= (t_room **)
 				ft_memalloc(sizeof(t_room *) * path[p_count]->total_steps);
-			check_malloc((void *)path[p_count]);
+			check_malloc((void *)path[p_count], lem_in);
 			path[p_count]->rooms[0] = tmp->to;
 			p_count++;
 		}
@@ -121,28 +121,28 @@ static int	set_paths(t_path **path)
 ** Collects and sorts the paths to calculate the final line/turn count
 */
 
-int	pathfinder(void)
+int	pathfinder(t_lem_in *lem_in)
 {
 	int		line_count;
 	int		p_count;
 	t_path	*paths[SIZE];
 
-	if (g_table->start_end_connected == 1)
+	if (lem_in->table->start_end_connected == 1)
 	{
-		g_optimal_line_count = 1;
-		set_special_path(paths);
+		lem_in->optimal_line_count = 1;
+		set_special_path(paths, lem_in);
 		return (1);
 	}
-	p_count = set_paths(paths);
+	p_count = set_paths(paths, lem_in);
 	sort_paths(paths, 0, p_count - 1);
-	line_count = count_lines(paths, p_count);
-	if (line_count < g_optimal_line_count || g_optimal_line_count == 0)
+	line_count = count_lines(paths, p_count, lem_in);
+	if (line_count < lem_in->optimal_line_count || lem_in->optimal_line_count == 0)
 	{
-		if (g_optimal_path_count != 0)
-			free_path(g_paths, g_optimal_path_count);
-		set_optimal_path(paths, p_count);
-		g_optimal_line_count = line_count;
-		g_optimal_path_count = p_count;
+		if (lem_in->optimal_path_count != 0)
+			free_path(lem_in->paths, lem_in->optimal_path_count);
+		set_optimal_path(paths, p_count, lem_in);
+		lem_in->optimal_line_count = line_count;
+		lem_in->optimal_path_count = p_count;
 	}
 	else
 		free_path(paths, p_count);

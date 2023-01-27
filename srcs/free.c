@@ -57,23 +57,23 @@ static void	free_hash_rooms(t_table *hash_slot)
 	}
 }
 
-static void	free_all_rooms(void)
+static void	free_all_rooms(t_lem_in *lem_in)
 {
 	int	i;
 
 	i = 0;
 	while (i < HASH_SIZE)
 	{
-		if (g_table[i].room)
-			free_hash_rooms(&g_table[i]);
+		if (lem_in->table[i].room)
+			free_hash_rooms(&lem_in->table[i]);
 		i++;
 	}
 }
 
-void	free_everything(void)
+void	free_everything(t_lem_in *lem_in)
 {
-	free_all_rooms();
-	if (g_map)
-		ft_memdel((void **)&g_map);
-	free_path(g_paths, g_optimal_path_count);
+	free_all_rooms(lem_in);
+	if (lem_in->map)
+		ft_memdel((void **)&lem_in->map);
+	free_path(lem_in->paths, lem_in->optimal_path_count);
 }

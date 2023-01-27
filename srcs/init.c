@@ -27,26 +27,26 @@ void	init_path(int *r_index, int *backward_link_used, t_room **old)
 	*old = NULL;
 }
 
-void	init_globals(int *path_found, t_flags *flags)
+void	init_variables(t_lem_in *lem_in, int *path_found, t_flags *flags)
 {
-	g_crossed = 1;
-	g_table->ants = 0;
-	g_table->start = NULL;
-	g_table->end = NULL;
-	g_optimal_path_count = 0;
-	g_optimal_line_count = 0;
+	lem_in->crossed = 1;
+	lem_in->table->ants = 0;
+	lem_in->table->start = NULL;
+	lem_in->table->end = NULL;
+	lem_in->optimal_path_count = 0;
+	lem_in->optimal_line_count = 0;
 	*path_found = 0;
-	g_map = (char *)ft_memalloc(sizeof(char) * STRING_SIZE);
-	check_malloc((void *)g_map);
+	lem_in->map = (char *)ft_memalloc(sizeof(char) * STRING_SIZE);
+	check_malloc((void *)lem_in->map, lem_in);
 	flags->no_distr = 0;
 	flags->line = 0;
 	flags->no_map = 0;
-	g_table->start_end_connected = 0;
+	lem_in->table->start_end_connected = 0;
 }
 
-void	init_ant_movement(t_ant_distr *distr)
+void	init_ant_movement(t_ant_distr *distr, t_lem_in *lem_in)
 {
 	distr->str_size = STRING_SIZE;
 	distr->line = (char *)ft_memalloc(sizeof(char) * distr->str_size);
-	check_malloc(distr->line);
+	check_malloc(distr->line, lem_in);
 }

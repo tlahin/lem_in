@@ -17,28 +17,28 @@
 ** and feed the parsed lines to corresponding functions
 */
 
-static void	process_line(char *line, int *stage)
+static void	process_line(char *line, int *stage, t_lem_in *lem_in)
 {
 	static int	room_type;
 
 	if (line[0] != '#')
 	{
-		check_valid_line(line);
-		if (assing_ants(line))
+		check_valid_line(line, lem_in);
+		if (assing_ants(line, lem_in))
 			return ;
 		if (*stage == 1 || ft_strchr(line, '-'))
 		{
-			assign_link(line);
+			assign_link(line, lem_in);
 			*stage = 1;
 		}
 		else
 		{
-			assign_room(line, room_type);
+			assign_room(line, room_type, lem_in);
 			room_type = NORMAL_ROOM;
 		}
 	}
 	else
-		read_command(line, &room_type);
+		read_command(line, &room_type, lem_in);
 }
 
 /*
@@ -46,7 +46,7 @@ static void	process_line(char *line, int *stage)
 ** Parse one (1) line (ending with '\n') and process it
 */
 
-int	parse_map(void)
+int	parse_map(t_lem_in *lem_in)
 {
 	t_line	line;
 	char	current_line[500];
@@ -56,19 +56,19 @@ int	parse_map(void)
 	line.start = 0;
 	line.end = 0;
 	stage = 0;
-	read_amount = read(0, g_map, STRING_SIZE);
+	read_amount = read(0, lem_in->map, STRING_SIZE);
 	while (line.start < read_amount)
 	{
 		line.index = 0;
-		while (g_map[line.end] != '\n' && line.end < read_amount)
-			current_line[line.index++] = g_map[line.end++];
+		while (lem_in->map[line.end] != '\n' && line.end < read_amount)
+			current_line[line.index++] = lem_in->map[line.end++];
 		current_line[line.index] = 0;
-		process_line(current_line, &stage);
+		process_line(current_line, &stage, lem_in);
 		line.end++;
 		line.start = line.end;
 	}
-	check_empty_file();
-	check_missing_special();
-	check_links(stage);
+	check_empty_file(lem_in);
+	check_missing_special(lem_in);
+	check_links(stage, lem_in);
 	return (OK);
 }

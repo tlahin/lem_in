@@ -34,14 +34,14 @@ void	delete_prev_room(t_room *room)
 	room->prev = 0;
 }
 
-void	remove_old_longer_path(t_room *room)
+void	remove_old_longer_path(t_room *room, t_lem_in *lem_in)
 {
 	t_room	*temp;
 	t_room	*final;
 
 	final = NULL;
 	temp = NULL;
-	while (room != g_table->start)
+	while (room != lem_in->table->start)
 	{
 		final = temp;
 		temp = room->prev;

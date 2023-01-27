@@ -73,10 +73,10 @@ static void	pure_forward_augment(t_link *rev_link, int r_i)
 ** Augments the path found during last bfs call
 */
 
-int	augment(t_link *rev_link, int rev_idx, t_room *old_room, int backward)
+int	augment(t_link *rev_link, int rev_idx, t_room *old_room, int backward, t_lem_in *lem_in)
 {
 	if (old_room != 0)
-		remove_old_longer_path(old_room);
+		remove_old_longer_path(old_room, lem_in);
 	if (backward == BACKWARD)
 	{
 		mixed_augment(rev_link, rev_idx - 1);

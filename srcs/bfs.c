@@ -34,7 +34,7 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 ** Track the path backwards and check for already existing flows
 */
 
-static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
+static int	conclude_path(t_link **que, t_tracker *tracker, int q_i, t_lem_in *lem_in)
 {
 	int		r_i;
 	int		target_index;
@@ -59,7 +59,7 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 		}
 		q_i--;
 	}
-	return (augment(r_que, r_i, old_room, backward_link_used));
+	return (augment(r_que, r_i, old_room, backward_link_used, lem_in));
 }
 
 /*
@@ -70,7 +70,7 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i)
 ** Will find the shortest connection, IF one exists
 */
 
-int	bfs(t_link *start)
+int	bfs(t_link *start, t_lem_in *lem_in)
 {
 	t_que		q;
 	int			result;
@@ -81,20 +81,20 @@ int	bfs(t_link *start)
 	result = 0;
 	while (q.remaining--)
 	{
-		if (q.que[q.index]->crossed != g_crossed)
+		if (q.que[q.index]->crossed != lem_in->crossed)
 		{
-			if (q.que[q.index]->to != g_table->end)
+			if (q.que[q.index]->to != lem_in->table->end)
 				q.remaining += search(q.que, &q.count, q.index, tracker);
 			else
 			{
-				result = conclude_path(q.que, tracker, q.index);
+				result = conclude_path(q.que, tracker, q.index, lem_in);
 				if (result != NOT_FOUND)
 					break ;
 			}
-			q.que[q.index]->crossed = g_crossed;
+			q.que[q.index]->crossed = lem_in->crossed;
 		}
 		q.index++;
 	}
-	g_crossed++;
+	lem_in->crossed++;
 	return (result);
 }

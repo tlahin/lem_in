@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-static void	print_help(void)
+static void	print_help(t_lem_in *lem_in)
 {
 	ft_printf("\nUSAGE\n\n");
 	ft_printf("\t./lem-in [-h] [-l] [-q] [-nm] [-nd] < 'map'\n\n");
@@ -22,23 +22,23 @@ static void	print_help(void)
 	ft_printf("\t-nm\t\tDisable printing the map\n\n");
 	ft_printf("\t-nd\t\tDisable printing the ant movement\n\n");
 	ft_printf("\t-q\t\tEnables silent mode to not print map nor ant movement\n\n");
-	free(g_map);
+	free(lem_in->map);
 	exit (0);
 }
 
-void	now_handle_it(t_flags *flags)
+void	now_handle_it(t_flags *flags, t_lem_in *lem_in)
 {
 	if (flags->no_map == 0)
-		ft_printf("%s\n", g_map);
+		ft_printf("%s\n", lem_in->map);
 	if (flags->line == 1)
-		ft_printf("%d\n", g_optimal_line_count);
-	if (g_table->start_end_connected == 1)
-		special_move();
+		ft_printf("%d\n", lem_in->optimal_line_count);
+	if (lem_in->table->start_end_connected == 1)
+		special_move(lem_in);
 	else if (flags->no_distr == 0)
-		ant_movement();
+		ant_movement(lem_in);
 }
 
-void	options(int ac, char **av, t_flags *flags)
+void	options(int ac, char **av, t_flags *flags, t_lem_in *lem_in)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ void	options(int ac, char **av, t_flags *flags)
 			else if (ft_strcmp(av[i], "-nm") == 0)
 				flags->no_map = 1;
 			if (ft_strcmp(av[i], "-h") == 0)
-				print_help();
+				print_help(lem_in);
 			i++;
 		}
 	}
