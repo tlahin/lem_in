@@ -60,9 +60,8 @@ static int	count_lines(t_path **path, int p_count, t_lem_in *lem_in)
 }
 
 /*
-** Saves the 'best' paths into a global variable
+** Saves the 'best' paths into lem_in struct
 */
-
 static void	set_optimal_path(t_path **paths, int p_count, t_lem_in *lem_in)
 {
 	int		p_index;
@@ -88,7 +87,6 @@ static void	set_optimal_path(t_path **paths, int p_count, t_lem_in *lem_in)
 /*
 ** Returns the amount of paths being used
 */
-
 static int	set_paths(t_path **path, t_lem_in *lem_in)
 {
 	int		p_count;
@@ -120,7 +118,6 @@ static int	set_paths(t_path **path, t_lem_in *lem_in)
 /*
 ** Collects and sorts the paths to calculate the final line/turn count
 */
-
 int	pathfinder(t_lem_in *lem_in)
 {
 	int		line_count;

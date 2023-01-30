@@ -16,7 +16,6 @@
 ** Sort commands from the rest of the data (ants, rooms, links)
 ** and feed the parsed lines to corresponding functions
 */
-
 static void	process_line(char *line, int *stage, t_lem_in *lem_in)
 {
 	static int	room_type;
@@ -42,10 +41,9 @@ static void	process_line(char *line, int *stage, t_lem_in *lem_in)
 }
 
 /*
-** Save the entire map into a global variable g_map
+** Save the entire map into a variable
 ** Parse one (1) line (ending with '\n') and process it
 */
-
 int	parse_map(t_lem_in *lem_in)
 {
 	t_line	line;

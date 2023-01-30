@@ -15,7 +15,6 @@
 /*
 ** Not occupied - No flow
 */
-
 static int	not_occupied(t_room *prev_room, int next_flow)
 {
 	return (prev_room == NULL && next_flow == UNUSED);
@@ -24,7 +23,6 @@ static int	not_occupied(t_room *prev_room, int next_flow)
 /*
 ** Occupied - BACKWARD flow
 */
-
 static int	occ_backward(int current_flow)
 {
 	return (current_flow == BACKWARD);
@@ -33,7 +31,6 @@ static int	occ_backward(int current_flow)
 /*
 ** Occupiedd - UNUSED flow - BACKWARD flow next
 */
-
 static int	occ_unused_to_backward(int current_flow, int next_flow)
 {
 	return (current_flow == UNUSED && next_flow == BACKWARD);
@@ -42,7 +39,6 @@ static int	occ_unused_to_backward(int current_flow, int next_flow)
 /*
 ** Occupied - USED_FORWARD flow - USED_FORWARD flow next - less steps taken
 */
-
 static int	shorter_path(int next_flow, int old_steps, int current_steps)
 {
 	return (next_flow == USED_FORWARD && old_steps > current_steps);
@@ -53,7 +49,6 @@ static int	shorter_path(int next_flow, int old_steps, int current_steps)
 ** to determine shortest path
 ** returning the amount of links/rooms to be added to the que
 */
-
 int	search(t_link **que, int *q_count, int idx, t_tracker *tracker)
 {
 	int		room_count;

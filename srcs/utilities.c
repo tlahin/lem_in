@@ -16,7 +16,6 @@
 ** Creates a new 'link' element to the list of links
 ** in a room
 */
-
 t_link	*add_link(t_room *from_room, t_room *to_room, t_lem_in *lem_in)
 {
 	t_link	*link;

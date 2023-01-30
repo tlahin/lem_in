@@ -16,8 +16,7 @@
 ** Creates the string with the ants and rooms which will be prited
 ** at the end of every 'turn'
 */
-
-void	insert_ant(t_mover *mover, t_lem_in *lem_in)
+void	insert_ant(t_room *room, t_mover *mover, t_lem_in *lem_in)
 {
 	int		i;
 	char	str[50];
@@ -32,7 +31,7 @@ void	insert_ant(t_mover *mover, t_lem_in *lem_in)
 	while (str[i])
 		i++;
 	str[i++] = '-';
-	ft_strcpy(str + i, mover->room[mover->room_idx]->name);
+	ft_strcpy(str + i, room->name);
 	while (str[i])
 		i++;
 	str[i++] = ' ';
@@ -54,7 +53,7 @@ static void	move_to_next(t_mover *mover, t_lem_in *lem_in)
 	next = mover->room[mover->room_idx + 1];
 	if (cur_room->ant != 0)
 	{
-		insert_ant(mover, lem_in);
+		insert_ant(next, mover, lem_in);
 		if (next != lem_in->table->end)
 			next->ant = cur_room->ant;
 		else
@@ -65,10 +64,13 @@ static void	move_to_next(t_mover *mover, t_lem_in *lem_in)
 
 static void	first_step(t_mover *mover, t_lem_in *lem_in)
 {
+	t_room	*room;
+
+	room = mover->room[0];
 	mover->room[0]->ant = mover->cur_ant;
 	mover->cur_ant++;
 	lem_in->paths[mover->p_index]->ant_count--;
-	insert_ant(mover, lem_in);
+	insert_ant(room ,mover, lem_in);
 }
 
 void	special_move(t_lem_in *lem_in)
@@ -79,7 +81,6 @@ void	special_move(t_lem_in *lem_in)
 	lem_in->optimal_line_count = 1;
 	while (cur_ant <= lem_in->table->ants)
 	{
-		ft_printf("L%d-end", cur_ant);
 		if (cur_ant <= lem_in->table->ants)
 			write(1, " ", 1);
 		cur_ant++;
@@ -92,7 +93,6 @@ void	special_move(t_lem_in *lem_in)
 ** moves ants if possible printing a string each 'turn'
 ** string contains which ant has moved and where it moved
 */
-
 void	ant_movement(t_lem_in *lem_in)
 {
 	t_mover	mover;

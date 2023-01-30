@@ -15,7 +15,6 @@
 /*
 ** Validate and start and end rooms to global variables
 */
-
 static void	assign_special_room(t_room *room, int room_type, t_lem_in *lem_in)
 {
 	check_duplicate_special(room, room_type, lem_in);
@@ -29,7 +28,6 @@ static void	assign_special_room(t_room *room, int room_type, t_lem_in *lem_in)
 ** Check if variable is already assigned
 ** Check if the given input is usable (positive number)
 */
-
 int	assing_ants(char *line, t_lem_in *lem_in)
 {
 	int	i;
@@ -50,7 +48,6 @@ int	assing_ants(char *line, t_lem_in *lem_in)
 ** Init rest of the variables
 ** Validate hash result and collected data
 */
-
 void	assign_room(char *line, int room_type, t_lem_in *lem_in)
 {
 	t_room	*room;
@@ -82,7 +79,6 @@ void	assign_room(char *line, int room_type, t_lem_in *lem_in)
 ** Validate input
 ** Link the rooms together
 */
-
 void	assign_link(char *line, t_lem_in *lem_in)
 {
 	char	**split;

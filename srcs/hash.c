@@ -67,7 +67,6 @@ int	hash_room(t_room *room, t_lem_in *lem_in)
 ** Retrives a room by converting input (rooms 'name')
 ** to a hash value and compares it to find a match in the table
 */
-
 t_room	*get_room(char *key, t_lem_in *lem_in)
 {
 	t_table	*tmp;

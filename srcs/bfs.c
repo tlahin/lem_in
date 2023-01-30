@@ -33,7 +33,6 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 ** After bfs finds a connection to the end room
 ** Track the path backwards and check for already existing flows
 */
-
 static int	conclude_path(t_link **que, t_tracker *tracker, \
 	int q_i, t_lem_in *lem_in)
 {
@@ -69,7 +68,6 @@ static int	conclude_path(t_link **que, t_tracker *tracker, \
 ** for a connection to the 'end' room
 ** Will find the shortest connection, IF one exists
 */
-
 int	bfs(t_link *start, t_lem_in *lem_in)
 {
 	t_que		q;

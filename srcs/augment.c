@@ -23,7 +23,6 @@ static void	delete_backward_link(t_link *rev_link, int i)
 ** Using mixed augment, removes the old backwards link if one exists
 ** and corrects the flow
 */
-
 static void	mixed_augment(t_link *rev_link, int r_i)
 {
 	int	i;
@@ -53,7 +52,6 @@ static void	mixed_augment(t_link *rev_link, int r_i)
 /*
 ** Straight forward flow
 */
-
 static void	pure_forward_augment(t_link *rev_link, int r_i)
 {
 	int	step_count;
@@ -72,7 +70,6 @@ static void	pure_forward_augment(t_link *rev_link, int r_i)
 /*
 ** Augments the path found during last bfs call
 */
-
 int	augment(t_link *rev_link, int rev_idx, t_room *old_room, t_lem_in *lem_in)
 {
 	if (old_room != 0)
