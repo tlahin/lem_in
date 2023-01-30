@@ -129,13 +129,6 @@ struct s_lem_in
 	t_path	*paths[SIZE];
 };
 
-/* extern t_table				g_table[HASH_SIZE];
-extern int					g_crossed;
-extern int					g_optimal_path_count;
-extern int					g_optimal_line_count;
-extern t_path				*g_paths[SIZE];
-extern char					*g_map; */
-
 /*
 ** Main stuff
 */
