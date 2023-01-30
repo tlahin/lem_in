@@ -17,7 +17,7 @@
 ** at the end of every 'turn'
 */
 
-void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num, t_lem_in *lem_in)
+void	insert_ant(t_mover *mover, t_lem_in *lem_in)
 {
 	int		i;
 	char	str[50];
@@ -26,44 +26,49 @@ void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num, t_lem_in *lem_
 	ft_bzero((void *)str, 50);
 	str[0] = 'L';
 	i = 1;
-	ant_num_str = ft_itoa(ant_num);
+	ant_num_str = ft_itoa(mover->cur_ant);
 	ft_strcpy(str + i, ant_num_str);
 	free(ant_num_str);
 	while (str[i])
 		i++;
 	str[i++] = '-';
-	ft_strcpy(str + i, room_name);
+	ft_strcpy(str + i, mover->room[mover->room_idx]->name);
 	while (str[i])
 		i++;
 	str[i++] = ' ';
-	ft_strcat(distr->line, str);
-	if (distr->line[distr->str_size - 1] != 0)
+	ft_strcat(mover->distr.line, str);
+	if (mover->distr.line[mover->distr.str_size - 1] != 0)
 	{
-		distr->str_size = distr->str_size * 2;
-		double_str_size((void **)&distr->line, distr->str_size, lem_in);
+		mover->distr.str_size = mover->distr.str_size * 2;
+		double_str_size((void **)&mover->distr.line, \
+			mover->distr.str_size, lem_in);
 	}
 }
 
-static void	move_to_next(t_ant_distr *distr, t_room *room, t_room *next, t_lem_in *lem_in)
+static void	move_to_next(t_mover *mover, t_lem_in *lem_in)
 {
-	if (room->ant != 0)
+	t_room	*next;
+	t_room	*cur_room;
+
+	cur_room = mover->room[mover->room_idx];
+	next = mover->room[mover->room_idx + 1];
+	if (cur_room->ant != 0)
 	{
-		insert_ant(distr, next->name, room->ant, lem_in);
+		insert_ant(mover, lem_in);
 		if (next != lem_in->table->end)
-			next->ant = room->ant;
+			next->ant = cur_room->ant;
 		else
 			next->ant++;
-		room->ant = 0;
+		cur_room->ant = 0;
 	}
 }
 
-static void	first_step(t_ant_distr *distr,
-	t_room *room, t_path *cur_path, int *cur_ant, t_lem_in *lem_in)
+static void	first_step(t_mover *mover, t_lem_in *lem_in)
 {
-	room->ant = *cur_ant;
-	(*cur_ant)++;
-	cur_path->ant_count--;
-	insert_ant(distr, room->name, room->ant, lem_in);
+	mover->room[0]->ant = mover->cur_ant;
+	mover->cur_ant++;
+	lem_in->paths[mover->p_index]->ant_count--;
+	insert_ant(mover, lem_in);
 }
 
 void	special_move(t_lem_in *lem_in)
@@ -90,29 +95,26 @@ void	special_move(t_lem_in *lem_in)
 
 void	ant_movement(t_lem_in *lem_in)
 {
-	int			p_index;
-	int			room_idx;
-	int			cur_ant;
-	t_room		**room;
-	t_ant_distr	distr;
+	t_mover	mover;
 
-	cur_ant = 1;
-	init_ant_movement(&distr, lem_in);
+	init_mover(&mover);
+	init_ant_movement(&mover.distr, lem_in);
 	while (lem_in->table->end->ant < lem_in->table->ants)
 	{
-		p_index = 0;
-		distr.line[0] = 0;
-		while (p_index < lem_in->optimal_path_count)
+		mover.p_index = 0;
+		mover.distr.line[0] = 0;
+		while (mover.p_index < lem_in->optimal_path_count)
 		{
-			room = lem_in->paths[p_index]->rooms;
-			room_idx = lem_in->paths[p_index]->total_steps - 1;
-			while (--room_idx >= 0)
-				move_to_next(&distr, room[room_idx], room[room_idx + 1], lem_in);
-			if (cur_ant <= lem_in->table->ants && lem_in->paths[p_index]->ant_count > 0)
-				first_step(&distr, room[0], lem_in->paths[p_index], &cur_ant, lem_in);
-			p_index++;
+			mover.room = lem_in->paths[mover.p_index]->rooms;
+			mover.room_idx = lem_in->paths[mover.p_index]->total_steps - 1;
+			while (--mover.room_idx >= 0)
+				move_to_next(&mover, lem_in);
+			if (mover.cur_ant <= lem_in->table->ants \
+				&& lem_in->paths[mover.p_index]->ant_count > 0)
+				first_step(&mover, lem_in);
+			mover.p_index++;
 		}
-		ft_putendl(distr.line);
+		ft_putendl(mover.distr.line);
 	}
-	ft_memdel((void **)&distr.line);
+	ft_memdel((void **)&mover.distr.line);
 }

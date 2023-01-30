@@ -20,10 +20,10 @@ void	init_que(t_que *q, t_link *start)
 	q->index = 0;
 }
 
-void	init_path(int *r_index, int *backward_link_used, t_room **old)
+void	init_path(int *r_index, t_room **old, t_lem_in *lem_in)
 {
 	*r_index = 0;
-	*backward_link_used = 0;
+	lem_in->backwards_link_used = 0;
 	*old = NULL;
 }
 
@@ -42,6 +42,7 @@ void	init_variables(t_lem_in *lem_in, int *path_found, t_flags *flags)
 	flags->line = 0;
 	flags->no_map = 0;
 	lem_in->table->start_end_connected = 0;
+	lem_in->backwards_link_used = 0;
 }
 
 void	init_ant_movement(t_ant_distr *distr, t_lem_in *lem_in)
@@ -49,4 +50,12 @@ void	init_ant_movement(t_ant_distr *distr, t_lem_in *lem_in)
 	distr->str_size = STRING_SIZE;
 	distr->line = (char *)ft_memalloc(sizeof(char) * distr->str_size);
 	check_malloc(distr->line, lem_in);
+}
+
+void	init_mover(t_mover *mover)
+{
+	mover->room = NULL;
+	mover->cur_ant = 1;
+	mover->p_index = 0;
+	mover->room_idx = 0;
 }

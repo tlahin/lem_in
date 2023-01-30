@@ -136,7 +136,8 @@ int	pathfinder(t_lem_in *lem_in)
 	p_count = set_paths(paths, lem_in);
 	sort_paths(paths, 0, p_count - 1);
 	line_count = count_lines(paths, p_count, lem_in);
-	if (line_count < lem_in->optimal_line_count || lem_in->optimal_line_count == 0)
+	if (line_count < lem_in->optimal_line_count \
+		|| lem_in->optimal_line_count == 0)
 	{
 		if (lem_in->optimal_path_count != 0)
 			free_path(lem_in->paths, lem_in->optimal_path_count);

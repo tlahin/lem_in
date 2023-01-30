@@ -48,10 +48,9 @@ static int	check_duplicate_link(t_room *a, t_room *b)
 	return (OK);
 }
 
-void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line, t_lem_in *lem_in)
+void	check_valid_link(t_room *r1, t_room *r2, char **split, t_lem_in *lem_in)
 {
-	if (check_multiple_char(line, '-', 1) == FAIL
-		|| check_empty_room(r1, r2) == FAIL
+	if (check_empty_room(r1, r2) == FAIL
 		|| check_duplicate_link(r1, r2) == FAIL)
 	{
 		ft_arrdel(&split);

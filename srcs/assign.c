@@ -68,7 +68,9 @@ void	assign_room(char *line, int room_type, t_lem_in *lem_in)
 	room->next = NULL;
 	room->link = NULL;
 	hash_result = hash_room(room, lem_in);
-	check_valid_room(split, room, line, hash_result, lem_in);
+	if (check_multiple_char(line, ' ', 2) == FAIL)
+		free_and_exit(lem_in);
+	check_valid_room(split, room, hash_result, lem_in);
 	room->x = ft_atoi(split[1]);
 	room->y = ft_atoi(split[2]);
 	ft_arrdel(&split);
@@ -92,7 +94,9 @@ void	assign_link(char *line, t_lem_in *lem_in)
 	room_2 = get_room(split[1], lem_in);
 	if (room_1 == lem_in->table->start && room_2 == lem_in->table->end)
 		lem_in->table->start_end_connected = 1;
-	check_valid_link(room_1, room_2, split, line, lem_in);
+	if (check_multiple_char(line, '-', 1) == FAIL)
+		free_and_exit(lem_in);
+	check_valid_link(room_1, room_2, split, lem_in);
 	add_link(room_1, room_2, lem_in);
 	add_link(room_2, room_1, lem_in);
 	ft_arrdel(&split);

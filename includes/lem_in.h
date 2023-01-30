@@ -45,6 +45,7 @@ typedef struct s_path		t_path;
 typedef struct s_ant_distr	t_ant_distr;
 typedef struct s_flags		t_flags;
 typedef struct s_lem_in		t_lem_in;
+typedef struct s_mover		t_mover;
 
 struct s_room
 {
@@ -127,6 +128,16 @@ struct s_lem_in
 	int		optimal_line_count;
 	char	*map;
 	t_path	*paths[SIZE];
+	int		backwards_link_used;
+};
+
+struct s_mover
+{
+	t_ant_distr	distr;
+	t_room		**room;
+	int			cur_ant;
+	int			p_index;
+	int			room_idx;
 };
 
 /*
@@ -141,8 +152,9 @@ int		main(int ac, char **av);
 
 void	init_variables(t_lem_in *lem_in, int *path_found, t_flags *flags);
 void	init_que(t_que *q, t_link *start);
-void	init_path(int *r_index, int *backward_link_used, t_room **old);
+void	init_path(int *r_index, t_room **old, t_lem_in *lem_in);
 void	init_ant_movement(t_ant_distr *distr, t_lem_in *lem_in);
+void	init_mover(t_mover *mover);
 
 /*
 ** Map processing
@@ -182,7 +194,8 @@ void	check_empty_file(t_lem_in *lem_in);
 ** Room errors
 */
 
-void	check_valid_room(char **split, t_room *room, char *line, int hash_ret, t_lem_in *lem_in);
+void	check_valid_room(char **split, t_room *room, \
+		int hash_ret, t_lem_in *lem_in);
 int		check_multiple_char(char *line, char c, int amount);
 
 /*
@@ -190,7 +203,8 @@ int		check_multiple_char(char *line, char c, int amount);
 */
 
 void	check_links(int stage, t_lem_in *lem_in);
-void	check_valid_link(t_room *r1, t_room *r2, char **split, char *line, t_lem_in *lem_in);
+void	check_valid_link(t_room *r1, t_room *r2, \
+		char **split, t_lem_in *lem_in);
 
 /*
 ** Special errors
@@ -242,7 +256,7 @@ int		search(t_link **que, int *q_count, int idx, t_tracker *tracker);
 ** Augment
 */
 
-int		augment(t_link *rev_link, int r_i, t_room *old_room, int backward, t_lem_in *lem_in);
+int		augment(t_link *rev_link, int r_i, t_room *old_room, t_lem_in *lem_in);
 
 /*
 ** Augment utilities
@@ -269,7 +283,7 @@ void	sort_paths(t_path **path, int low, int high);
 ** Mover
 */
 
-void	insert_ant(t_ant_distr *distr, char *room_name, int ant_num, t_lem_in *lem_in);
+void	insert_ant(t_mover *mover, t_lem_in *lem_in);
 void	ant_movement(t_lem_in *lem_in);
 void	special_move(t_lem_in *lem_in);
 

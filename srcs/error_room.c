@@ -60,10 +60,10 @@ static int	check_duplicate_room(int hash_result, t_room *room)
 	return (OK);
 }
 
-void	check_valid_room(char **split, t_room *room, char *line, int hash_ret, t_lem_in *lem_in)
+void	check_valid_room(char **split, t_room *room, \
+	int hash_ret, t_lem_in *lem_in)
 {
-	if (check_multiple_char(line, ' ', 2) == FAIL
-		|| check_room_coordinates(split) == FAIL
+	if (check_room_coordinates(split) == FAIL
 		|| check_duplicate_room(hash_ret, room) == FAIL)
 	{
 		ft_arrdel(&split);

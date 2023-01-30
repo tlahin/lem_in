@@ -12,10 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-static void	check_backward_usage(int *current_status, int flow)
+static void	check_backward_usage(t_lem_in *lem_in, int flow)
 {
 	if (flow == BACKWARD)
-		*current_status = BACKWARD;
+		lem_in->backwards_link_used = BACKWARD;
 }
 
 static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
@@ -34,15 +34,15 @@ static int	fewer_step_path(t_link *link, int new_steps, t_room **old_room)
 ** Track the path backwards and check for already existing flows
 */
 
-static int	conclude_path(t_link **que, t_tracker *tracker, int q_i, t_lem_in *lem_in)
+static int	conclude_path(t_link **que, t_tracker *tracker, \
+	int q_i, t_lem_in *lem_in)
 {
 	int		r_i;
 	int		target_index;
-	int		backward_link_used;
 	t_link	r_que[SIZE];
 	t_room	*old_room;
 
-	init_path(&r_i, &backward_link_used, &old_room);
+	init_path(&r_i, &old_room, lem_in);
 	set_link(&r_que[r_i++], que[q_i]->to, que[q_i]->from, que[q_i]->flow);
 	target_index = tracker[q_i].index;
 	while (q_i > 0)
@@ -54,12 +54,12 @@ static int	conclude_path(t_link **que, t_tracker *tracker, int q_i, t_lem_in *le
 				(que[q_i], tracker[q_i].steps, &old_room) == NOT_FOUND)
 				return (NOT_FOUND);
 			set_link(&r_que[r_i], que[q_i]->to, que[q_i]->from, que[q_i]->flow);
-			check_backward_usage(&backward_link_used, r_que[r_i++].flow);
+			check_backward_usage(lem_in, r_que[r_i++].flow);
 			target_index = tracker[q_i].index;
 		}
 		q_i--;
 	}
-	return (augment(r_que, r_i, old_room, backward_link_used, lem_in));
+	return (augment(r_que, r_i, old_room, lem_in));
 }
 
 /*
