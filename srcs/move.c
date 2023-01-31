@@ -16,7 +16,7 @@
 ** Creates the string with the ants and rooms which will be prited
 ** at the end of every 'turn'
 */
-void	insert_ant(t_room *room, t_mover *mover, t_lem_in *lem_in, int ant_num)
+void	insert_ant(t_mover *mover, t_lem_in *lem_in, int ant_num, char *room_name)
 {
 	int		i;
 	char	str[50];
@@ -31,7 +31,7 @@ void	insert_ant(t_room *room, t_mover *mover, t_lem_in *lem_in, int ant_num)
 	while (str[i])
 		i++;
 	str[i++] = '-';
-	ft_strcpy(str + i, room->name);
+	ft_strcpy(str + i, room_name);
 	while (str[i])
 		i++;
 	str[i++] = ' ';
@@ -53,7 +53,7 @@ static void	move_to_next(t_mover *mover, t_lem_in *lem_in)
 	next = mover->room[mover->room_idx + 1];
 	if (cur_room->ant != 0)
 	{
-		insert_ant(next, mover, lem_in, cur_room->ant);
+		insert_ant(mover, lem_in, cur_room->ant, next->name);
 		if (next != lem_in->table->end)
 			next->ant = cur_room->ant;
 		else
@@ -70,7 +70,7 @@ static void	first_step(t_mover *mover, t_lem_in *lem_in)
 	mover->room[0]->ant = mover->cur_ant;
 	mover->cur_ant++;
 	lem_in->paths[mover->p_index]->ant_count--;
-	insert_ant(room, mover, lem_in, mover->cur_ant);
+	insert_ant(mover, lem_in, room->ant, room->name);
 }
 
 void	special_move(t_lem_in *lem_in)
