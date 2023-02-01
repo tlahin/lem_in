@@ -283,7 +283,8 @@ void	sort_paths(t_path **path, int low, int high);
 ** Mover
 */
 
-void	insert_ant(t_mover *mover, t_lem_in *lem_in, int ant_num, char *room_name);
+void	insert_ant(t_mover *mover, t_lem_in *lem_in, \
+		int ant_num, char *room_name);
 void	ant_movement(t_lem_in *lem_in);
 void	special_move(t_lem_in *lem_in);
 

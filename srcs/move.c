@@ -16,7 +16,8 @@
 ** Creates the string with the ants and rooms which will be prited
 ** at the end of every 'turn'
 */
-void	insert_ant(t_mover *mover, t_lem_in *lem_in, int ant_num, char *room_name)
+void	insert_ant(t_mover *mover, t_lem_in *lem_in, \
+	int ant_num, char *room_name)
 {
 	int		i;
 	char	str[50];
